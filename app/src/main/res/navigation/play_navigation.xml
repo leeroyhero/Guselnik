@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/play_navigation"
+    app:startDestination="@id/playFragment">
+
+    <fragment
+        android:id="@+id/playFragment"
+        android:name="ru.bogdanov.guselnik.fragment.PlayFragment"
+        android:label="fragment_play"
+        tools:layout="@layout/fragment_play" >
+        <action
+            android:id="@+id/action_playFragment_to_craftActivity"
+            app:destination="@id/craftActivity" />
+        <action
+            android:id="@+id/action_playFragment_to_songPickerFragment"
+            app:destination="@id/songPickerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/songPickerFragment"
+        android:name="ru.bogdanov.guselnik.fragment.SongPickerFragment"
+        android:label="fragment_song_picker"
+        tools:layout="@layout/fragment_song_picker" />
+    <activity
+        android:id="@+id/craftActivity"
+        android:name="ru.bogdanov.guselnik.activity.CraftActivity"
+        android:label="activity_craft"
+        tools:layout="@layout/activity_craft" />
+</navigation>

@@ -1,12 +1,13 @@
-package ru.bogdanov.guselnik
+package ru.bogdanov.guselnik.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ru.bogdanov.guselnik.R
 
-class MainActivity : AppCompatActivity() {
+class CraftActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_craft)
     }
 }
