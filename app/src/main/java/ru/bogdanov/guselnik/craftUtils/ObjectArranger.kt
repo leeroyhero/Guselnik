@@ -6,7 +6,9 @@ import ru.bogdanov.guselnik.custom.ObjectView
 import ru.bogdanov.guselnik.item.ObjectForCreation
 
 class ObjectArranger(val field: FrameLayout) {
-    fun createObject(objectForCreation: ObjectForCreation) {
+    fun createObject(
+        objectForCreation: ObjectForCreation
+    ) {
         val objectView=ObjectView(field.context)
         field.addView(objectView)
         objectView.place(objectForCreation.posX, objectForCreation.posY)

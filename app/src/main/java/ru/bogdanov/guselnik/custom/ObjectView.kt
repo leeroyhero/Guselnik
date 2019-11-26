@@ -1,14 +1,19 @@
 package ru.bogdanov.guselnik.custom
 
+import android.content.ClipData
+import android.content.ClipDescription
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
+import android.view.DragEvent
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import ru.bogdanov.guselnik.R
@@ -23,11 +28,12 @@ class ObjectView @JvmOverloads constructor(
 
     init {
         layoutParams = LayoutParams(wid, hei)
-        //  layoutParams=LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+
+        tag="item"
 
         val shape = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
-            cornerRadius = 8f
+            cornerRadius = 30f
             setStroke(
                 5, ContextCompat.getColor(
                     context,
@@ -56,16 +62,24 @@ class ObjectView @JvmOverloads constructor(
     private fun touchEvent(v: View, event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                dX = v.x - event.rawX
-                dY = v.y - event.rawY
-                return true
-            }
-            MotionEvent.ACTION_MOVE -> {
-                v.animate()
-                    .x(event.rawX + dX)
-                    .y(event.rawY + dY)
-                    .setDuration(0)
-                    .start()
+                val dragData=ClipData.newPlainText("123","456")
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    startDragAndDrop(
+                        dragData,
+                        DragShadowBuilder(this),
+                        this,
+                        0
+                    )
+                } else {
+                    startDrag(
+                        dragData,
+                        DragShadowBuilder(this),
+                        this,
+                        0
+                    )
+                }
+
+                visibility=View.INVISIBLE
                 return true
             }
             else -> return false
@@ -78,5 +92,6 @@ class ObjectView @JvmOverloads constructor(
             .y(posY - hei / 2)
             .setDuration(0)
             .start()
+        visibility=View.VISIBLE
     }
 }
