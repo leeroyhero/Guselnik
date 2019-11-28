@@ -6,15 +6,14 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import kotlinx.android.synthetic.main.fragment_craft.*
 import kotlinx.android.synthetic.main.fragment_craft.view.*
 
 import ru.bogdanov.guselnik.R
+import ru.bogdanov.guselnik.craftUtils.checkCollision
 import ru.bogdanov.guselnik.interfaces.DropListener
 import ru.bogdanov.guselnik.viewModel.CraftViewModel
 
-/**
- * A simple [Fragment] subclass.
- */
 class CraftFragment : Fragment(),DropListener {
     val model = viewModels<CraftViewModel>()
 
@@ -34,7 +33,15 @@ class CraftFragment : Fragment(),DropListener {
         super.onActivityCreated(savedInstanceState)
     }
 
-    override fun dropped(v: View, type: String, xPos: Float, yPos: Float) {
-        Toast.makeText(context, "$type $xPos $yPos", Toast.LENGTH_SHORT).show()
+    override fun dropped(droppedView: View) {
+       // Toast.makeText(context, "$type $xPos $yPos", Toast.LENGTH_SHORT).show()
+        for (index in 0 until (arrangeField.childCount-1)){
+            val view=arrangeField.getChildAt(index)
+            if (droppedView!=view&& checkCollision(view, droppedView))
+            {
+                model.value.collisionDetected(droppedView, view)
+                break
+            }
+        }
     }
 }
