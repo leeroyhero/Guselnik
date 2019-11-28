@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_craft.*
 import kotlinx.android.synthetic.main.fragment_craft.view.*
 
@@ -31,11 +32,17 @@ class CraftFragment : Fragment(),DropListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        model.value.viewToRemove.observe(this, Observer { removeView(it) })
+        model.value.viewToCreate.observe(this, Observer {  })
+    }
+
+    private fun removeView(view: View) {
+        arrangeField.removeView(view)
     }
 
     override fun dropped(droppedView: View) {
-       // Toast.makeText(context, "$type $xPos $yPos", Toast.LENGTH_SHORT).show()
-        for (index in 0 until (arrangeField.childCount-1)){
+        for (index in 0 until (arrangeField.childCount)){
             val view=arrangeField.getChildAt(index)
             if (droppedView!=view&& checkCollision(view, droppedView))
             {

@@ -27,6 +27,8 @@ class TouchEvent(private val returnable: Boolean) {
         else
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
+                    v.z=30f
+
                     startX = v.x
                     startY = v.y
 
@@ -45,6 +47,7 @@ class TouchEvent(private val returnable: Boolean) {
                 MotionEvent.ACTION_UP -> {
                     dX = 0f
                     dY = 0f
+                    v.z=0f
 
                     dropListener?.dropped(v)
 

@@ -83,6 +83,22 @@
                 android:src="@drawable/instrument_chisel"
                 android:layout_margin="8dp" />
         </ru.bogdanov.guselnik.custom.MovableCraftView>
+
+        <ru.bogdanov.guselnik.custom.CraftView
+            android:id="@+id/trash"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="#FFBCBC"
+            app:type="trash">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Мусорка"
+                android:textColor="@android:color/white" />
+        </ru.bogdanov.guselnik.custom.CraftView>
     </FrameLayout>
 
 </FrameLayout>
