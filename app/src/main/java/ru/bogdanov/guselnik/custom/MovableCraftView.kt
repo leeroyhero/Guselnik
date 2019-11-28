@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import ru.bogdanov.guselnik.R
 import ru.bogdanov.guselnik.craftUtils.TouchEvent
+import ru.bogdanov.guselnik.interfaces.DropListener
 
 class MovableCraftView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -21,5 +22,9 @@ class MovableCraftView @JvmOverloads constructor(
         touchEvent=TouchEvent(returnable)
 
         setOnTouchListener(touchEvent.touchListener)
+    }
+
+    fun setDropListener(listener:DropListener){
+        touchEvent.setDropListener(listener)
     }
 }
