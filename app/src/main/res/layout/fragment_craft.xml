@@ -3,12 +3,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.CraftFragment">
 
     <FrameLayout
         android:id="@+id/arrangeField"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:tag="field" />
+        android:tag="field" >
+
+        <ru.bogdanov.guselnik.custom.CraftView
+            android:id="@+id/forest"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            app:type="forest"
+            android:layout_gravity="center_horizontal|top"
+            android:background="#1FFF46" >
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Лес"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+        </ru.bogdanov.guselnik.custom.CraftView>
+
+        <ru.bogdanov.guselnik.custom.MovableCraftView
+            android:id="@+id/axe"
+            android:layout_width="@dimen/instrument"
+            android:layout_height="@dimen/instrument"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="16dp"
+            app:type="axe"
+            app:returnable="true"
+            android:background="#ECECEC" >
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:src="@drawable/insrument_axe" />
+        </ru.bogdanov.guselnik.custom.MovableCraftView>
+
+        <ru.bogdanov.guselnik.custom.MovableCraftView
+            android:id="@+id/knife"
+            android:layout_width="@dimen/instrument"
+            android:layout_height="@dimen/instrument"
+            android:layout_gravity="bottom"
+            app:type="knife"
+            app:returnable="true"
+            android:layout_margin="16dp"
+            android:background="#ECECEC" >
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:src="@drawable/instrument_knife" />
+        </ru.bogdanov.guselnik.custom.MovableCraftView>
+
+        <ru.bogdanov.guselnik.custom.MovableCraftView
+            android:id="@+id/chisel"
+            android:layout_width="@dimen/instrument"
+            android:layout_height="@dimen/instrument"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            app:type="chisel"
+            app:returnable="true"
+            android:background="#ECECEC" >
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/instrument_chisel"
+                android:layout_margin="8dp" />
+        </ru.bogdanov.guselnik.custom.MovableCraftView>
+    </FrameLayout>
 
 </FrameLayout>
