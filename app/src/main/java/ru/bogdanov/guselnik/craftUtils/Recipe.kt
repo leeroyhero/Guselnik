@@ -37,34 +37,31 @@ class Recipe {
         addToRecipeMap("plankHoled", "knife", "deckHoled") //дека с дырками
         addToRecipeMap("plank", "chisel", "plankHoled") //доска с отверстиями
 
+        addToRecipeMap("plankHoled", "axe", "wheel") //колесо
+        addToRecipeMap("wheel", "resin", "wheelLyra") //колесо для лиры
 
-        /*
-        колесо=доска с отверстием+топор
-        колесо лиры=колесо+смола
+        addToRecipeMap("chisel", "log", "trough") //корыто
+        addToRecipeMap("trough", "axe", "troughWindow") //корыто с окном
+        addToRecipeMap("trough", "deck", "body") //корпус
 
-        корытце=полено+долото
+        addToRecipeMap("trough", "deckHoled", "bodyHoled") //корпус с отверстиями
+        addToRecipeMap("body", "chisel", "bodyHoled") //корпус с отверстиями
 
-        корпус=корытце+дека
+        addToRecipeMap("troughWindow", "deck", "bodyWindow") //корпус с окном
+        addToRecipeMap("troughWindow", "deckHoled", "bodyWindow") //корпус с окном
+        addToRecipeMap("body", "axe", "bodyWindow") //корпус с окном
 
-        корпус с отверстием=корытце+дека с отверстием
-        корпус с отверстием=корпус+долото
+        addToRecipeMap("bark", "knife", "tongue") //язычок
+        addToRecipeMap("cane", "knife", "tongue") //язычок
+        addToRecipeMap("tube", "knife", "tongue") //язычок
+        addToRecipeMap("sliver", "knife", "tongue") //язычок
 
-        корпус с окном=корытце с окном+дека
-        корпус с окном=корытце с окном+дека с отверстием
-        корпус с окном=корпус+топор
+        addToRecipeMap("bark", "axe", "resin") //смола
+        addToRecipeMap("bark", "chisel", "resin") //смола
 
-        язычок=береста\кора+нож
-        язычок=тростник+нож
-        язычок=трубка+нож
-        язычок=щепка+нож
+        addToRecipeMap("stick", "resin", "bow") //смык
 
-        смола=береста\кора+топор
-        смола=береста\кора+долото
-
-        смык=палка+смола
-
-        ложка=палка+нож
-*/
+        addToRecipeMap("stick", "knife", "spoon") //ложка
     }
 
     private fun addToRecipeMap(type1:String, type2:String, resultType:String){
