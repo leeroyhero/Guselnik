@@ -1,6 +1,8 @@
 package ru.bogdanov.guselnik.craftUtils
 
+import android.util.Log
 import android.view.View
+import ru.bogdanov.guselnik.custom.CraftView
 
 fun checkCollision(view: View, droppedView:View ):Boolean{
     val x=droppedView.x+droppedView.width/2

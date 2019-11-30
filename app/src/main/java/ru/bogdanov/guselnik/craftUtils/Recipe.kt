@@ -15,9 +15,13 @@ class Recipe {
     }
 
     private fun fillRecipeMap() {
-        addToRecipeMap("axe", "forest", "log")
-        addToRecipeMap("knife", "forest", "cane")
-        addToRecipeMap("chisel", "forest", "bark")
+        addToRecipeMap("axe", "forest", "log") //полено
+        addToRecipeMap("knife", "forest", "cane") //тростник
+        addToRecipeMap("chisel", "forest", "bark") //кора
+
+        addToRecipeMap("axe", "log", "plank") //доска
+        addToRecipeMap("axe", "plank", "sliver") //щепка
+        addToRecipeMap("axe", "sliver", "peg") //колок
     }
 
     private fun addToRecipeMap(type1:String, type2:String, resultType:String){
