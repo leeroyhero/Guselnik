@@ -26,6 +26,9 @@ class CraftViewFactory {
             "sliver"->"щепка"
             "peg"->"колок"
 
+            "stick"->"палка"
+            "neck"->"гриф"
+
             else->"Хлам"
         }
     }
