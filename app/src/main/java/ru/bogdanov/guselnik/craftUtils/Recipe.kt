@@ -26,7 +26,7 @@ class Recipe {
 
         addToRecipeMap("log", "knife", "stick") //палка
         addToRecipeMap("stick", "peg", "neck") //гриф
-//
+
         addToRecipeMap("stick", "chisel", "tube") //трубка
 
         addToRecipeMap("tube", "chisel", "tubeHoled") //трубка с отверстиями
