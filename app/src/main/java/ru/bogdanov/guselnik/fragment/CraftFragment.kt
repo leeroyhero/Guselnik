@@ -8,22 +8,26 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.craft_field.*
+import kotlinx.android.synthetic.main.craft_field.view.*
 import kotlinx.android.synthetic.main.fragment_craft.*
 import kotlinx.android.synthetic.main.fragment_craft.view.*
 
 import ru.bogdanov.guselnik.R
 import ru.bogdanov.guselnik.craftUtils.CraftViewFactory
+import ru.bogdanov.guselnik.craftUtils.animateProgress
 import ru.bogdanov.guselnik.craftUtils.checkCollision
-import ru.bogdanov.guselnik.custom.CreatedCraftView
 import ru.bogdanov.guselnik.custom.MovableCraftView
 import ru.bogdanov.guselnik.interfaces.DropListener
 import ru.bogdanov.guselnik.item.CraftDraft
+import ru.bogdanov.guselnik.item.Instrument
 import ru.bogdanov.guselnik.viewModel.CraftViewModel
 import kotlin.random.Random
 
 class CraftFragment : Fragment(), DropListener {
     val model = viewModels<CraftViewModel>()
     private val viewFactory = CraftViewFactory()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +46,21 @@ class CraftFragment : Fragment(), DropListener {
 
         model.value.viewToRemove.observe(this, Observer { removeView(it) })
         model.value.viewToCreate.observe(this, Observer { createView(it) })
+        model.value.getCount { opened, max ->
+            progressBarOpenCount.animateProgress(opened, max)
+            textViewOpenCount.text = "$opened/$max"
+        }
+        model.value.newInstrument.observe(this, Observer {
+            model.value.getCount { opened, max ->
+                newInstrumentOpen(it, opened, max)
+            }
+        })
+    }
+
+    private fun newInstrumentOpen(instrument: Instrument, openCount: Int, instrumentCount: Int) {
+        progressBarOpenCount.animateProgress(openCount, instrumentCount)
+        textViewOpenCount.text = "$openCount/$instrumentCount"
+        notification.show(instrument.name)
     }
 
     private fun createView(draft: CraftDraft) {
@@ -68,6 +87,10 @@ class CraftFragment : Fragment(), DropListener {
 
 
             (view as MovableCraftView).setDropListener(this)
+
+            if (draft.recipeItem is Instrument) {
+                model.value.checkNewInstrumentOpened(draft.recipeItem)
+            }
         }
     }
 

@@ -5,18 +5,18 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.bogdanov.guselnik.craftUtils.CraftViewFactory
-import ru.bogdanov.guselnik.craftUtils.Recipe
-import ru.bogdanov.guselnik.craftUtils.getCenter
-import ru.bogdanov.guselnik.craftUtils.getCoordinates
+import ru.bogdanov.guselnik.craftUtils.*
 import ru.bogdanov.guselnik.custom.CraftView
 import ru.bogdanov.guselnik.item.CraftDraft
+import ru.bogdanov.guselnik.item.Instrument
 import ru.bogdanov.guselnik.item.RecipeItem
 
 
 class CraftViewModel : ViewModel() {
     val viewToRemove = MutableLiveData<View>()
     val viewToCreate = MutableLiveData<CraftDraft>()
+    val newInstrument = MutableLiveData<Instrument>()
+    private val instruments= Instruments()
 
     private val recipe = Recipe()
 
@@ -45,6 +45,10 @@ class CraftViewModel : ViewModel() {
                 }
             }
         }
+    }
+
+    fun getCount(callback:(opened:Int, max:Int)->Unit){
+        instruments.getCount(callback)
     }
 
     private fun canCraft(secondType: String): Boolean {
@@ -81,6 +85,12 @@ class CraftViewModel : ViewModel() {
     private fun needToDelete(droppedType: String, secondType: String): Boolean {
         return secondType.equals("trash") &&
                 (!droppedType.equals("knife") && !droppedType.equals("axe") && !droppedType.equals("chisel"))
+    }
+
+    fun checkNewInstrumentOpened(item: Instrument) {
+        val isNewInstrument=instruments.newInstrumentOpened(item)
+        if (isNewInstrument)
+            newInstrument.value=item
     }
 
 }

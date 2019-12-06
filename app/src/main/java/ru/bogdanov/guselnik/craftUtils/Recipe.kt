@@ -1,7 +1,7 @@
 package ru.bogdanov.guselnik.craftUtils
 
-import ru.bogdanov.guselnik.item.Ingredients
-import ru.bogdanov.guselnik.item.Instruments
+import ru.bogdanov.guselnik.item.Ingredient
+import ru.bogdanov.guselnik.item.Instrument
 import ru.bogdanov.guselnik.item.RecipeItem
 import kotlin.math.max
 import kotlin.math.min
@@ -19,117 +19,117 @@ class Recipe {
     }
 
     private fun fillMusicalRecipeMap() {
-        addToRecipeMap("sliver","sliver", Instruments.Crackle()) //трещетка
+        addToRecipeMap("sliver","sliver", Instrument.Crackle()) //трещетка
 
-        addToRecipeMap("plank","stick", Instruments.Drum()) //барабанка
-        addToRecipeMap("plankHoled","stick", Instruments.Drum())
+        addToRecipeMap("plank","stick", Instrument.Drum()) //барабанка
+        addToRecipeMap("plankHoled","stick", Instrument.Drum())
 
-        addToRecipeMap("log","stick", Instruments.Firewood()) //дрова
+        addToRecipeMap("log","stick", Instrument.Firewood()) //дрова
 
-        addToRecipeMap("cane","cane", Instruments.Kukigl()) //кугиклы
-        addToRecipeMap("tube","tube", Instruments.Kukigl())
-        addToRecipeMap("cane","axe", Instruments.Kukigl())
-        addToRecipeMap("tube","axe", Instruments.Kukigl())
+        addToRecipeMap("cane","cane", Instrument.Kukigl()) //кугиклы
+        addToRecipeMap("tube","tube", Instrument.Kukigl())
+        addToRecipeMap("cane","axe", Instrument.Kukigl())
+        addToRecipeMap("tube","axe", Instrument.Kukigl())
 
-        addToRecipeMap("tube","chisel", Instruments.Kaluka()) //калюка
-        addToRecipeMap("cane","chisel", Instruments.Kaluka())
+        addToRecipeMap("tube","chisel", Instrument.Kaluka()) //калюка
+        addToRecipeMap("cane","chisel", Instrument.Kaluka())
 
-        addToRecipeMap("kaluka","chisel", Instruments.Whistle()) //свирель
-        addToRecipeMap("tubeHoled","chisel", Instruments.Whistle())
+        addToRecipeMap("kaluka","chisel", Instrument.Whistle()) //свирель
+        addToRecipeMap("tubeHoled","chisel", Instrument.Whistle())
 
-        addToRecipeMap("whistle","whistle", Instruments.WhistleDouble()) //свирель двойчатка
-        addToRecipeMap("whistle","kaluka", Instruments.WhistleDouble())
+        addToRecipeMap("whistle","whistle", Instrument.WhistleDouble()) //свирель двойчатка
+        addToRecipeMap("whistle","kaluka", Instrument.WhistleDouble())
 
-        addToRecipeMap("tubeHoled","knife", Instruments.Pishik()) //пищик
-        addToRecipeMap("tubeHoled","tongue", Instruments.Pishik())
+        addToRecipeMap("tubeHoled","knife", Instrument.Pishik()) //пищик
+        addToRecipeMap("tubeHoled","tongue", Instrument.Pishik())
 
-        addToRecipeMap("pishik","pishik", Instruments.PishikDouble()) //двойной пищик
+        addToRecipeMap("pishik","pishik", Instrument.PishikDouble()) //двойной пищик
 
-        addToRecipeMap("pishik","bark", Instruments.KurskWhistle()) //курский рожок
+        addToRecipeMap("pishik","bark", Instrument.KurskWhistle()) //курский рожок
 
-        addToRecipeMap("tubeHoled","bark", Instruments.NerehtWhistle()) //нерехтский рожек
-        addToRecipeMap("shepherdWhistle","chisel", Instruments.NerehtWhistle())
+        addToRecipeMap("tubeHoled","bark", Instrument.NerehtWhistle()) //нерехтский рожек
+        addToRecipeMap("shepherdWhistle","chisel", Instrument.NerehtWhistle())
 
-        addToRecipeMap("tube","bark", Instruments.ShepherdWhistle()) //постушеская труба
-        addToRecipeMap("tube","tongue", Instruments.ShepherdWhistle())
-        addToRecipeMap("tongue","bark", Instruments.ShepherdWhistle())
+        addToRecipeMap("tube","bark", Instrument.ShepherdWhistle()) //постушеская труба
+        addToRecipeMap("tube","tongue", Instrument.ShepherdWhistle())
+        addToRecipeMap("tongue","bark", Instrument.ShepherdWhistle())
 
-        addToRecipeMap("bark","bark", Instruments.Sharkunok()) //шаркунок
+        addToRecipeMap("bark","bark", Instrument.Sharkunok()) //шаркунок
 
-        addToRecipeMap("stick","axe", Instruments.Rubel()) //рубель
+        addToRecipeMap("stick","axe", Instrument.Rubel()) //рубель
 
-        addToRecipeMap("spoon","spoon", Instruments.Spoons()) //ложки
+        addToRecipeMap("spoon","spoon", Instrument.Spoons()) //ложки
 
-        addToRecipeMap("bodyWindow","peg", Instruments.GusliLir()) //гусли лирообразные
+        addToRecipeMap("bodyWindow","peg", Instrument.GusliLir()) //гусли лирообразные
 
-        addToRecipeMap("body","neck", Instruments.Balalayka()) //балалайка
-        addToRecipeMap("bodyHoled","neck", Instruments.Balalayka())
+        addToRecipeMap("body","neck", Instrument.Balalayka()) //балалайка
+        addToRecipeMap("bodyHoled","neck", Instrument.Balalayka())
 
-        addToRecipeMap("gusliLir","bow", Instruments.Gudok()) //gudok
-        addToRecipeMap("gusliKril","bow", Instruments.Gudok())
+        addToRecipeMap("gusliLir","bow", Instrument.Gudok()) //gudok
+        addToRecipeMap("gusliKril","bow", Instrument.Gudok())
 
-        addToRecipeMap("balalayka","bow", Instruments.Violin()) //скрипка
-        addToRecipeMap("gudok","neck", Instruments.Violin())
+        addToRecipeMap("balalayka","bow", Instrument.Violin()) //скрипка
+        addToRecipeMap("gudok","neck", Instrument.Violin())
 
-        addToRecipeMap("gudok","wheel", Instruments.WheeledLyra()) //колесная лира
-        addToRecipeMap("gudok","wheelLyra", Instruments.WheeledLyra())
+        addToRecipeMap("gudok","wheel", Instrument.WheeledLyra()) //колесная лира
+        addToRecipeMap("gudok","wheelLyra", Instrument.WheeledLyra())
 
-        addToRecipeMap("щепка","chisel", Instruments.Greben()) //гребень
+        addToRecipeMap("щепка","chisel", Instrument.Greben()) //гребень
 
-        addToRecipeMap("gusliKril","stick", Instruments.Cimbal()) //цимбалы
+        addToRecipeMap("gusliKril","stick", Instrument.Cimbal()) //цимбалы
 
-        addToRecipeMap("body","peg", Instruments.GusliKril()) //гусли крыловидные
-        addToRecipeMap("bodyHoled","peg", Instruments.GusliKril())
+        addToRecipeMap("body","peg", Instrument.GusliKril()) //гусли крыловидные
+        addToRecipeMap("bodyHoled","peg", Instrument.GusliKril())
     }
 
     private fun fillRecipeMap() {
-        addToRecipeMap("axe", "forest", Ingredients.Log()) //полено
-        addToRecipeMap("knife", "forest", Ingredients.Cane()) //тростник
-        addToRecipeMap("chisel", "forest", Ingredients.Bark()) //кора
+        addToRecipeMap("axe", "forest", Ingredient.Log()) //полено
+        addToRecipeMap("knife", "forest", Ingredient.Cane()) //тростник
+        addToRecipeMap("chisel", "forest", Ingredient.Bark()) //кора
 
-        addToRecipeMap("axe", "log", Ingredients.Plank()) //доска
+        addToRecipeMap("axe", "log", Ingredient.Plank()) //доска
 
-        addToRecipeMap("axe", "plank", Ingredients.Sliver()) //щепка
-        addToRecipeMap("axe", "sliver", Ingredients.Peg()) //колок
+        addToRecipeMap("axe", "plank", Ingredient.Sliver()) //щепка
+        addToRecipeMap("axe", "sliver", Ingredient.Peg()) //колок
 
-        addToRecipeMap("log", "knife", Ingredients.Stick()) //палка
-        addToRecipeMap("stick", "peg", Ingredients.Neck()) //гриф
+        addToRecipeMap("log", "knife", Ingredient.Stick()) //палка
+        addToRecipeMap("stick", "peg", Ingredient.Neck()) //гриф
 
-        addToRecipeMap("stick", "chisel", Ingredients.Tube()) //трубка
+        addToRecipeMap("stick", "chisel", Ingredient.Tube()) //трубка
 
-        addToRecipeMap("tube", "chisel", Ingredients.TubeHoled()) //трубка с отверстиями
-        addToRecipeMap("cane", "chisel", Ingredients.TubeHoled()) //трубка с отверстиями
+        addToRecipeMap("tube", "chisel", Ingredient.TubeHoled()) //трубка с отверстиями
+        addToRecipeMap("cane", "chisel", Ingredient.TubeHoled()) //трубка с отверстиями
 
-        addToRecipeMap("knife", "plank", Ingredients.Deck()) //дека
-        addToRecipeMap("deck", "chisel", Ingredients.DeckHoled()) //дека с дырками
-        addToRecipeMap("plankHoled", "knife", Ingredients.DeckHoled()) //дека с дырками
-        addToRecipeMap("plank", "chisel", Ingredients.PlankHoled()) //доска с отверстиями
+        addToRecipeMap("knife", "plank", Ingredient.Deck()) //дека
+        addToRecipeMap("deck", "chisel", Ingredient.DeckHoled()) //дека с дырками
+        addToRecipeMap("plankHoled", "knife", Ingredient.DeckHoled()) //дека с дырками
+        addToRecipeMap("plank", "chisel", Ingredient.PlankHoled()) //доска с отверстиями
 
-        addToRecipeMap("plankHoled", "axe", Ingredients.Wheel()) //колесо
-        addToRecipeMap("wheel", "resin", Ingredients.WheelLyra()) //колесо для лиры
+        addToRecipeMap("plankHoled", "axe", Ingredient.Wheel()) //колесо
+        addToRecipeMap("wheel", "resin", Ingredient.WheelLyra()) //колесо для лиры
 
-        addToRecipeMap("chisel", "log", Ingredients.Trough()) //корыто
-        addToRecipeMap("trough", "axe", Ingredients.TroughWindow()) //корыто с окном
-        addToRecipeMap("trough", "deck", Ingredients.Body()) //корпус
+        addToRecipeMap("chisel", "log", Ingredient.Trough()) //корыто
+        addToRecipeMap("trough", "axe", Ingredient.TroughWindow()) //корыто с окном
+        addToRecipeMap("trough", "deck", Ingredient.Body()) //корпус
 
-        addToRecipeMap("trough", "deckHoled", Ingredients.BodyHoled()) //корпус с отверстиями
-        addToRecipeMap("body", "chisel", Ingredients.BodyHoled()) //корпус с отверстиями
+        addToRecipeMap("trough", "deckHoled", Ingredient.BodyHoled()) //корпус с отверстиями
+        addToRecipeMap("body", "chisel", Ingredient.BodyHoled()) //корпус с отверстиями
 
-        addToRecipeMap("troughWindow", "deck", Ingredients.BodyWindow()) //корпус с окном
-        addToRecipeMap("troughWindow", "deckHoled", Ingredients.BodyWindow()) //корпус с окном
-        addToRecipeMap("body", "axe", Ingredients.BodyWindow()) //корпус с окном
+        addToRecipeMap("troughWindow", "deck", Ingredient.BodyWindow()) //корпус с окном
+        addToRecipeMap("troughWindow", "deckHoled", Ingredient.BodyWindow()) //корпус с окном
+        addToRecipeMap("body", "axe", Ingredient.BodyWindow()) //корпус с окном
 
-        addToRecipeMap("bark", "knife", Ingredients.Tongue()) //язычок
-        addToRecipeMap("cane", "knife", Ingredients.Tongue()) //язычок
-        addToRecipeMap("tube", "knife", Ingredients.Tongue()) //язычок
-        addToRecipeMap("sliver", "knife", Ingredients.Tongue()) //язычок
+        addToRecipeMap("bark", "knife", Ingredient.Tongue()) //язычок
+        addToRecipeMap("cane", "knife", Ingredient.Tongue()) //язычок
+        addToRecipeMap("tube", "knife", Ingredient.Tongue()) //язычок
+        addToRecipeMap("sliver", "knife", Ingredient.Tongue()) //язычок
 
-        addToRecipeMap("bark", "axe", Ingredients.Resin()) //смола
-        addToRecipeMap("bark", "chisel", Ingredients.Resin()) //смола
+        addToRecipeMap("bark", "axe", Ingredient.Resin()) //смола
+        addToRecipeMap("bark", "chisel", Ingredient.Resin()) //смола
 
-        addToRecipeMap("stick", "resin", Ingredients.Bow()) //смык
+        addToRecipeMap("stick", "resin", Ingredient.Bow()) //смык
 
-        addToRecipeMap("stick", "knife", Ingredients.Spoon()) //ложка
+        addToRecipeMap("stick", "knife", Ingredient.Spoon()) //ложка
     }
 
     private fun addToRecipeMap(type1:String, type2:String, result:RecipeItem){
