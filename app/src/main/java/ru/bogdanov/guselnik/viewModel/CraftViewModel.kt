@@ -11,6 +11,7 @@ import ru.bogdanov.guselnik.craftUtils.getCenter
 import ru.bogdanov.guselnik.craftUtils.getCoordinates
 import ru.bogdanov.guselnik.custom.CraftView
 import ru.bogdanov.guselnik.item.CraftDraft
+import ru.bogdanov.guselnik.item.RecipeItem
 
 
 class CraftViewModel : ViewModel() {
@@ -30,13 +31,13 @@ class CraftViewModel : ViewModel() {
             if (needToDelete(droppedType, secondType)) {
                 viewToRemove.value = dropped
             } else {
-                val newViewType = recipe.getNewViewType(droppedType, secondType)
+                val craftItem = recipe.getNewViewType(droppedType, secondType)
 
-                if (!newViewType.equals("none")) {
+                if (craftItem!=null) {
                     removeIngredients(dropped, view, droppedType, secondType)
 
                     createNewView(
-                        newViewType,
+                        craftItem,
                         dropped,
                         view,
                         needToAnimateDown
@@ -65,7 +66,7 @@ class CraftViewModel : ViewModel() {
     }
 
     private fun createNewView(
-        newViewType: String,
+        recipeItem: RecipeItem,
         droppedView: CraftView,
         view2: CraftView,
         needToAnimateDown: Boolean
@@ -74,7 +75,7 @@ class CraftViewModel : ViewModel() {
         if (needToAnimateDown) coordinates=droppedView.getCenter()
         else coordinates= getCoordinates(droppedView, view2)
 
-        viewToCreate.value = CraftDraft(newViewType, coordinates.first, coordinates.second, needToAnimateDown)
+        viewToCreate.value = CraftDraft(recipeItem, coordinates.first, coordinates.second, needToAnimateDown)
     }
 
     private fun needToDelete(droppedType: String, secondType: String): Boolean {

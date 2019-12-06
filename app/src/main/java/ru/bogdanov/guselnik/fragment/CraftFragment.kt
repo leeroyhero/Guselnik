@@ -45,7 +45,7 @@ class CraftFragment : Fragment(), DropListener {
     }
 
     private fun createView(draft: CraftDraft) {
-        val view = viewFactory.getView(draft.type, context)
+        val view = viewFactory.getView(draft.recipeItem, context)
         if (view != null) {
             val params = FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.WRAP_CONTENT,

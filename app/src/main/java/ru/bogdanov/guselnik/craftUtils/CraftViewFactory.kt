@@ -5,47 +5,34 @@ import android.view.View
 import kotlinx.android.synthetic.main.created_craft_view.view.*
 import ru.bogdanov.guselnik.custom.CraftView
 import ru.bogdanov.guselnik.custom.CreatedCraftView
+import ru.bogdanov.guselnik.item.Ingredients
+import ru.bogdanov.guselnik.item.Instruments
+import ru.bogdanov.guselnik.item.RecipeItem
 
 class CraftViewFactory {
-    fun getView(type: String, context: Context?): View? {
+    fun getView(recipeItem: RecipeItem, context: Context?): View? {
         if (context == null) return null
 
+        return when (recipeItem) {
+            is Ingredients -> getIngredientsView(recipeItem, context)
+            is Instruments -> getInstrumentView(recipeItem, context)
+            else -> null
+        }
+    }
+
+    private fun getInstrumentView(item: Instruments, context: Context): CreatedCraftView {
         val view = CreatedCraftView(context)
-        (view as CraftView).type = type
-        view.textViewName.text = getItemName(type)
+        (view as CraftView).type = item.tag
+        view.textViewName.text = item.name
 
         return view
     }
 
-    private fun getItemName(type: String): String {
-        return when (type) {
-            "log" -> "полено"
-            "cane" -> "тростник"
-            "bark" -> "кора"
-            "plank" -> "доска"
-            "sliver" -> "щепка"
-            "peg" -> "колок"
+    private fun getIngredientsView(item: Ingredients, context: Context): CreatedCraftView {
+        val view = CreatedCraftView(context)
+        (view as CraftView).type = item.tag
+        view.textViewName.text = item.name
 
-            "stick" -> "палка"
-            "neck" -> "гриф"
-            "tube" -> "трубка"
-            "tubeHoled" -> "трубка с отверстиями"
-            "deck" -> "дека"
-            "deckHoled" -> "дека с дырками"
-            "plankHoled" -> "доска с отверстиями"
-            "wheel" -> "колесо"
-            "wheelLyra" -> "колесо для лиры"
-            "trough" -> "корыто"
-            "troughWindow" -> "корыто с окном"
-            "body" -> "корпус"
-            "bodyHoled" -> "корпус с отверстиями"
-            "bodyWindow" -> "корпус с окном"
-            "tongue" -> "язычок"
-            "resin" -> "смола"
-            "bow" -> "смык"
-            "spoon" -> "ложка"
-
-            else -> "Хлам"
-        }
+        return view
     }
 }
