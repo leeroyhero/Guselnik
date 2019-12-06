@@ -5,13 +5,81 @@ import kotlin.math.min
 
 class Recipe {
     val recipeMap= mutableMapOf<String, String>()
+    val musicalRecipeMap= mutableMapOf<String, String>()
 
     init {
         fillRecipeMap()
+        fillMusicalRecipeMap()
     }
+
+
 
     fun getNewViewType(droppedType: String, secondType: String): String {
         return recipeMap.get(getHash(droppedType, secondType))?:"none"
+    }
+
+    private fun fillMusicalRecipeMap() {
+        addToMusicalRecipeMap("sliver","sliver", "crackle") //трещетка
+
+        addToMusicalRecipeMap("plank","stick", "drum") //барабанка
+        addToMusicalRecipeMap("plankHoled","stick", "drum")
+
+        addToMusicalRecipeMap("log","stick", "firewood") //дрова
+
+        addToMusicalRecipeMap("cane","cane", "kukigl") //кугиклы
+        addToMusicalRecipeMap("tube","tube", "kukigl")
+        addToMusicalRecipeMap("cane","axe", "kukigl")
+        addToMusicalRecipeMap("tube","axe", "kukigl")
+
+        addToMusicalRecipeMap("tube","chisel", "kaluka") //калюка
+        addToMusicalRecipeMap("cane","chisel", "kaluka")
+
+        addToMusicalRecipeMap("kaluka","chisel", "whistle") //свирель
+        addToMusicalRecipeMap("tubeHoled","chisel", "whistle")
+
+        addToMusicalRecipeMap("whistle","whistle", "whistleDouble") //свирель двойчатка
+        addToMusicalRecipeMap("whistle","kaluka", "whistleDouble")
+
+        addToMusicalRecipeMap("tubeHoled","knife", "pishik") //пищик
+        addToMusicalRecipeMap("tubeHoled","tongue", "pishik")
+
+        addToMusicalRecipeMap("pishik","pishik", "pishikDouble") //двойной пищик
+
+        addToMusicalRecipeMap("pishik","bark", "kurskWhistle") //курский рожок
+
+        addToMusicalRecipeMap("tubeHoled","bark", "nerehtWhistle") //нерехтский рожек
+        addToMusicalRecipeMap("shepherdWhistle","chisel", "nerehtWhistle")
+
+        addToMusicalRecipeMap("tube","bark", "shepherdWhistle") //постушеская труба
+        addToMusicalRecipeMap("tube","tongue", "shepherdWhistle")
+        addToMusicalRecipeMap("tongue","bark", "shepherdWhistle")
+
+        addToMusicalRecipeMap("bark","bark", "sharkunok") //шаркунок
+
+        addToMusicalRecipeMap("stick","axe", "rubel") //рубель
+
+        addToMusicalRecipeMap("spoon","spoon", "spoons") //ложки
+
+        addToMusicalRecipeMap("bodyWindow","peg", "gusliLir") //гусли лирообразные
+
+        addToMusicalRecipeMap("body","neck", "balalayka") //балалайка
+        addToMusicalRecipeMap("bodyHoled","neck", "balalayka")
+
+        addToMusicalRecipeMap("gusliLir","bow", "gudok") //gudok
+        addToMusicalRecipeMap("gusliKril","bow", "gudok")
+
+        addToMusicalRecipeMap("balalayka","bow", "violin") //скрипка
+        addToMusicalRecipeMap("gudok","neck", "violin")
+
+        addToMusicalRecipeMap("gudok","wheel", "wheeledLyra") //колесная лира
+        addToMusicalRecipeMap("gudok","wheelLyra", "wheeledLyra")
+
+        addToMusicalRecipeMap("щепка","chisel", "greben") //гребень
+
+        addToMusicalRecipeMap("gusliKril","stick", "cimbal") //цимбалы
+
+        addToMusicalRecipeMap("body","peg", "gusliKril") //гусли крыловидные
+        addToMusicalRecipeMap("bodyWindow","peg", "gusliKril")
     }
 
     private fun fillRecipeMap() {
@@ -66,6 +134,13 @@ class Recipe {
 
     private fun addToRecipeMap(type1:String, type2:String, resultType:String){
         recipeMap.put(
+            getHash(type1, type2),
+            resultType
+        )
+    }
+
+    private fun addToMusicalRecipeMap(type1:String, type2:String, resultType:String){
+        musicalRecipeMap.put(
             getHash(type1, type2),
             resultType
         )

@@ -23,25 +23,31 @@ class CraftViewModel : ViewModel() {
         val droppedType = (dropped as CraftView).type
         val secondType = (view as CraftView).type
 
-        val needToAnimateDown: Boolean = secondType.equals("forest")
+        if (canCraft(secondType)) {
 
-        if (needToDelete(droppedType, secondType)) {
-            viewToRemove.value = dropped
-        }
-        else {
-            val newViewType = recipe.getNewViewType(droppedType, secondType)
+            val needToAnimateDown: Boolean = secondType.equals("forest")
 
-            if (!newViewType.equals("none")) {
-                removeIngredients(dropped, view, droppedType, secondType)
+            if (needToDelete(droppedType, secondType)) {
+                viewToRemove.value = dropped
+            } else {
+                val newViewType = recipe.getNewViewType(droppedType, secondType)
 
-                createNewView(
-                    newViewType,
-                    dropped,
-                    view,
-                    needToAnimateDown
-                )
+                if (!newViewType.equals("none")) {
+                    removeIngredients(dropped, view, droppedType, secondType)
+
+                    createNewView(
+                        newViewType,
+                        dropped,
+                        view,
+                        needToAnimateDown
+                    )
+                }
             }
         }
+    }
+
+    private fun canCraft(secondType: String): Boolean {
+        return !secondType.equals("axe")&&!secondType.equals("knife")&&!secondType.equals("chisel")
     }
 
     private fun removeIngredients(
