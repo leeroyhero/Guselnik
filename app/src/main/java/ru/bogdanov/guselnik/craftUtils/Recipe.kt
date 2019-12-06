@@ -12,8 +12,6 @@ class Recipe {
         fillMusicalRecipeMap()
     }
 
-
-
     fun getNewViewType(droppedType: String, secondType: String): String {
         return recipeMap.get(getHash(droppedType, secondType))?:"none"
     }
@@ -79,7 +77,7 @@ class Recipe {
         addToMusicalRecipeMap("gusliKril","stick", "cimbal") //цимбалы
 
         addToMusicalRecipeMap("body","peg", "gusliKril") //гусли крыловидные
-        addToMusicalRecipeMap("bodyWindow","peg", "gusliKril")
+        addToMusicalRecipeMap("bodyHoled","peg", "gusliKril")
     }
 
     private fun fillRecipeMap() {
