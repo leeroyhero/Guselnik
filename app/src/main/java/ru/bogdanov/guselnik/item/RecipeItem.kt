@@ -1,6 +1,8 @@
 package ru.bogdanov.guselnik.item
 
-sealed class Instruments(tag:String, name:String, image:Int?=null){
+interface RecipeItem
+
+sealed class Instruments(tag:String, name:String, image:Int?=null): RecipeItem {
     class Crackle():Instruments("crackle", "трещетка")
     class Drum():Instruments("drum", "барабанка")
     class Firewood():Instruments("firewood", "дрова")
@@ -26,7 +28,7 @@ sealed class Instruments(tag:String, name:String, image:Int?=null){
     class GusliKril():Instruments("gusliKril", "гусли крыловидные")
 }
 
-sealed class Ingredients(tag:String, name:String, image:Int?=null) {
+sealed class Ingredients(tag:String, name:String, image:Int?=null): RecipeItem {
     class Log():Ingredients("log", "полено")
     class Cane():Ingredients("cane", "тростник")
     class Bark():Ingredients("bark", "кора")
