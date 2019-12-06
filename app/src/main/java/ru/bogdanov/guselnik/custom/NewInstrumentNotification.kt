@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.new_notification.view.*
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay

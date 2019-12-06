@@ -8,8 +8,6 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.craft_field.*
-import kotlinx.android.synthetic.main.craft_field.view.*
 import kotlinx.android.synthetic.main.fragment_craft.*
 import kotlinx.android.synthetic.main.fragment_craft.view.*
 
@@ -46,10 +44,6 @@ class CraftFragment : Fragment(), DropListener {
 
         model.value.viewToRemove.observe(this, Observer { removeView(it) })
         model.value.viewToCreate.observe(this, Observer { createView(it) })
-        model.value.getCount { opened, max ->
-            progressBarOpenCount.animateProgress(opened, max)
-            textViewOpenCount.text = "$opened/$max"
-        }
         model.value.newInstrument.observe(this, Observer {
             model.value.getCount { opened, max ->
                 newInstrumentOpen(it, opened, max)
@@ -58,8 +52,6 @@ class CraftFragment : Fragment(), DropListener {
     }
 
     private fun newInstrumentOpen(instrument: Instrument, openCount: Int, instrumentCount: Int) {
-        progressBarOpenCount.animateProgress(openCount, instrumentCount)
-        textViewOpenCount.text = "$openCount/$instrumentCount"
         notification.show(instrument.name)
     }
 
@@ -106,5 +98,11 @@ class CraftFragment : Fragment(), DropListener {
                 break
             }
         }
+
+        if (checkCollision(droppedView, forest))
+            model.value.collisionDetected(droppedView, forest)
+
+        if (checkCollision(droppedView, trash))
+            model.value.collisionDetected(droppedView, trash)
     }
 }
