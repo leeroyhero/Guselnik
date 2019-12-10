@@ -26,6 +26,7 @@ sealed class Instrument(val tag: String, val name: String, val image: Int? = nul
     class Greben() : Instrument("greben", "гребень")
     class Cimbal() : Instrument("cimbal", "цимбалы")
     class GusliKril() : Instrument("gusliKril", "гусли крыловидные")
+    class Kolotushka() : Instrument("kolotushka", "колотушка")
 }
 
 sealed class Ingredient(val tag: String, val name: String, val image: Int? = null) : RecipeItem {
