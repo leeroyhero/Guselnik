@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="type" format="string"/>
+
     <declare-styleable name="FieldObject">
-        <attr name="type" format="string"/>
+        <attr name="type"/>
     </declare-styleable>
 
     <declare-styleable name="MovableCraftView">
         <attr name="returnable" format="boolean"/>
-        <attr name="type" format="string"/>
+        <attr name="type"/>
     </declare-styleable>
 </resources>

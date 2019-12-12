@@ -5,34 +5,31 @@ import android.view.View
 import kotlinx.android.synthetic.main.created_craft_view.view.*
 import ru.bogdanov.guselnik.custom.FieldObject
 import ru.bogdanov.guselnik.custom.CreatedCraftView
+import ru.bogdanov.guselnik.item.CraftItem
 import ru.bogdanov.guselnik.item.Ingredient
-import ru.bogdanov.guselnik.item.Instrument
-import ru.bogdanov.guselnik.item.RecipeItem
 
 class CraftViewFactory {
-    fun getView(recipeItem: RecipeItem, context: Context?): View? {
+    fun getView(ingredient: Ingredient, context: Context?): View? {
         if (context == null) return null
 
-        return when (recipeItem) {
-            is Ingredient -> getIngredientsView(recipeItem, context)
-            is Instrument -> getInstrumentView(recipeItem, context)
-            else -> null
+        return when (ingredient.isInstrument) {
+            false -> getIngredientsView(ingredient, context)
+            true -> getInstrumentView(ingredient, context)
         }
     }
 
-    private fun getInstrumentView(item: Instrument, context: Context): CreatedCraftView {
+    private fun getInstrumentView(item: Ingredient, context: Context): CreatedCraftView {
         val view = CreatedCraftView(context)
-        (view as FieldObject).type = item.tag
-        view.textViewName.text = item.name
+        (view as CraftItem).type = item.type
+        view.textViewName.text = item.label
 
         return view
     }
 
     private fun getIngredientsView(item: Ingredient, context: Context): CreatedCraftView {
         val view = CreatedCraftView(context)
-        (view as FieldObject).type = item.tag
-        view.textViewName.text = item.name
-
+        (view as CraftItem).type = item.type
+        view.textViewName.text = item.label
         return view
     }
 }

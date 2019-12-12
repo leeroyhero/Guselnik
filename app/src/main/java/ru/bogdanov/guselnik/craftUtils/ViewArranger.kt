@@ -6,7 +6,6 @@ import android.widget.FrameLayout
 import ru.bogdanov.guselnik.custom.MovableCraftView
 import ru.bogdanov.guselnik.interfaces.DropListener
 import ru.bogdanov.guselnik.item.CraftDraft
-import ru.bogdanov.guselnik.item.Instrument
 import kotlin.random.Random
 
 class ViewArranger(val field: FrameLayout, val dropListener: DropListener) {

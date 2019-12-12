@@ -6,22 +6,21 @@ import androidx.lifecycle.ViewModel
 import ru.bogdanov.guselnik.craftUtils.*
 import ru.bogdanov.guselnik.custom.FieldObject
 import ru.bogdanov.guselnik.item.CraftDraft
-import ru.bogdanov.guselnik.item.Instrument
-import ru.bogdanov.guselnik.item.RecipeItem
+import ru.bogdanov.guselnik.item.CraftItem
+import ru.bogdanov.guselnik.item.Ingredient
 
 
 class CraftViewModel : ViewModel() {
     val viewToRemove = MutableLiveData<View>()
     val viewToCreate = MutableLiveData<CraftDraft>()
-    val newInstrument = MutableLiveData<Instrument>()
+    val newInstrument = MutableLiveData<Ingredient>()
 
-    private val instruments= Instruments()
     private val recipe = Recipe()
 
 
     fun collisionDetected(dropped: View, view: View) {
-        val droppedType = (dropped as FieldObject).type
-        val secondType = (view as FieldObject).type
+        val droppedType = (dropped as CraftItem).type
+        val secondType = (view as CraftItem).type
 
         if (canCraft(secondType)) {
 
@@ -51,8 +50,8 @@ class CraftViewModel : ViewModel() {
     }
 
     private fun removeIngredients(
-        dropped: FieldObject,
-        view: FieldObject,
+        dropped: View,
+        view: View,
         droppedType: String,
         secondType: String
     ) {
@@ -65,9 +64,9 @@ class CraftViewModel : ViewModel() {
     }
 
     private fun createNewView(
-        recipeItem: RecipeItem,
-        droppedView: FieldObject,
-        view2: FieldObject,
+        recipeItem: Ingredient,
+        droppedView: View,
+        view2: View,
         needToAnimateDown: Boolean
     ) {
         var coordinates:Pair<Float, Float>?=null
@@ -80,12 +79,6 @@ class CraftViewModel : ViewModel() {
     private fun needToDelete(droppedType: String, secondType: String): Boolean {
         return secondType.equals("trash") &&
                 (!droppedType.equals("knife") && !droppedType.equals("axe") && !droppedType.equals("chisel"))
-    }
-
-    fun checkNewInstrumentOpened(item: Instrument) {
-        val isNewInstrument=instruments.newInstrumentOpened(item)
-        if (isNewInstrument)
-            newInstrument.value=item
     }
 
 }
