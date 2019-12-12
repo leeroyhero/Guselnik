@@ -3,7 +3,6 @@ package ru.bogdanov.guselnik.craftUtils
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import ru.bogdanov.guselnik.custom.CraftView
 import ru.bogdanov.guselnik.interfaces.DropListener
 
 class TouchEvent(private val returnable: Boolean) {

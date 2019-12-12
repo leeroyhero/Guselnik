@@ -1,17 +1,43 @@
 package ru.bogdanov.guselnik.craftUtils
 
-import android.util.Log
 import android.view.View
-import ru.bogdanov.guselnik.custom.CraftView
+import android.widget.FrameLayout
 
-fun checkCollision(view: View, droppedView:View ):Boolean{
-    val x=droppedView.x+droppedView.width/2
-    val y=droppedView.y+droppedView.height/2
+class Collision(val field: FrameLayout, val dropObjects: Array<View>) {
 
-    if (x<view.x) return false
-    if (y<view.y) return false
-    if (x>(view.x+view.width)) return false
-    if (y>(view.y+view.height)) return false
+    fun findCollision(dropped: View): View? {
+        val list = prepareObjectList()
+        val collisionView = find(dropped, list)
+        return collisionView
+    }
 
-    return true
+    private fun find(dropped: View, list: MutableList<View>): View? {
+        for (view in list){
+            if (isCollision(view, dropped))
+                if (view!=dropped)
+                    return view
+        }
+        return null
+    }
+
+    private fun prepareObjectList(): MutableList<View> {
+        val list = dropObjects.toMutableList()
+        repeat(field.childCount) {
+            list.add(field.getChildAt(it))
+        }
+        return list
+    }
+
+    fun isCollision(view: View, droppedView: View): Boolean {
+        val x = droppedView.x + droppedView.width / 2
+        val y = droppedView.y + droppedView.height / 2
+
+        if (x < view.x) return false
+        if (y < view.y) return false
+        if (x > (view.x + view.width)) return false
+        if (y > (view.y + view.height)) return false
+
+        return true
+    }
 }
+
