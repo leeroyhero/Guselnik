@@ -3,7 +3,7 @@ package ru.bogdanov.guselnik.craftUtils
 import android.view.View
 import android.widget.FrameLayout
 
-class Collision(val field: FrameLayout, val dropObjects: Array<View>) {
+class CollisionDetector(val field: FrameLayout, val dropObjects: Array<View>) {
 
     fun findCollision(dropped: View): View? {
         val list = prepareObjectList()
@@ -28,7 +28,7 @@ class Collision(val field: FrameLayout, val dropObjects: Array<View>) {
         return list
     }
 
-    fun isCollision(view: View, droppedView: View): Boolean {
+    private fun isCollision(view: View, droppedView: View): Boolean {
         val x = droppedView.x + droppedView.width / 2
         val y = droppedView.y + droppedView.height / 2
 

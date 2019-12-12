@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_craft.*
 import kotlinx.android.synthetic.main.fragment_craft.view.*
 
 import ru.bogdanov.guselnik.R
-import ru.bogdanov.guselnik.craftUtils.Collision
+import ru.bogdanov.guselnik.craftUtils.CollisionDetector
 import ru.bogdanov.guselnik.craftUtils.CraftViewFactory
 import ru.bogdanov.guselnik.craftUtils.ViewArranger
 import ru.bogdanov.guselnik.interfaces.DropListener
@@ -20,8 +20,8 @@ import ru.bogdanov.guselnik.viewModel.CraftViewModel
 class CraftFragment : Fragment(), DropListener {
     val model = viewModels<CraftViewModel>()
     private val viewFactory = CraftViewFactory()
-    private lateinit var arranger:ViewArranger
-    private lateinit var collision:Collision
+    private lateinit var arranger: ViewArranger
+    private lateinit var collision: CollisionDetector
 
 
     override fun onCreateView(
@@ -32,8 +32,8 @@ class CraftFragment : Fragment(), DropListener {
         view.axe.setDropListener(this)
         view.knife.setDropListener(this)
         view.chisel.setDropListener(this)
-        arranger= ViewArranger(view.arrangeField, this)
-        collision=Collision(view.arrangeField, arrayOf(view.forest, view.bonfire))
+        arranger = ViewArranger(view.arrangeField, this)
+        collision = CollisionDetector(view.arrangeField, arrayOf(view.forest, view.bonfire))
         return view
     }
 
@@ -43,7 +43,7 @@ class CraftFragment : Fragment(), DropListener {
         model.value.viewToRemove.observe(this, Observer { removeView(it) })
         model.value.viewToCreate.observe(this, Observer { createView(it) })
         model.value.newInstrument.observe(this, Observer {
-            notification.show(it.name)
+            notification.show(it.label)
         })
     }
 
@@ -57,7 +57,7 @@ class CraftFragment : Fragment(), DropListener {
     }
 
     override fun dropped(droppedView: View) {
-        val collisionView=collision.findCollision(droppedView)
-        if (collisionView!=null) model.value.collisionDetected(droppedView, collisionView)
+        val collisionView = collision.findCollision(droppedView)
+        if (collisionView != null) model.value.collisionDetected(droppedView, collisionView)
     }
 }

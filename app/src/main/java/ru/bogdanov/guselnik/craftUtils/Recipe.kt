@@ -12,7 +12,7 @@ class Recipe {
         fillMusicalRecipeMap()
     }
 
-    fun getNewViewType(droppedType: String, secondType: String): Ingredient? {
+    fun getNewIngredient(droppedType: String, secondType: String): Ingredient? {
         return recipeMap.get(getHash(droppedType, secondType))
     }
 
@@ -28,6 +28,7 @@ class Recipe {
         addToRecipeMap(Ingredient.POLENO.type, KNIFE, Ingredient.PALKA) //палка
 
         addToRecipeMap(Ingredient.PALKA.type, CHISEL, Ingredient.SPOON) //палка
+        addToRecipeMap(Ingredient.POLENO.type, BONFIRE, Ingredient.UGOL)
     }
 
     private fun addToRecipeMap(type1: String, type2: String, result: Ingredient) {

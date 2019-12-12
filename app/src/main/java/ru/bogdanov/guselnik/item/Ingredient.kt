@@ -8,6 +8,7 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
     PALKA("palka", "Палка"),
 
     SPOON("spoon", "Ложка"),
+    UGOL("ugol", "Уголь"),
 
     SPOONS("spoons", "Ложки", isInstrument = true)
 }
