@@ -1,5 +1,6 @@
 package ru.bogdanov.guselnik.craftUtils
 
+import android.util.Log
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
@@ -9,7 +10,7 @@ import ru.bogdanov.guselnik.item.CraftDraft
 import kotlin.random.Random
 
 class ViewArranger(val field: FrameLayout, val dropListener: DropListener) {
-    fun addView(view: View, draft: CraftDraft) {
+    fun arrangeView(view: View, draft: CraftDraft) {
         val params = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
@@ -28,7 +29,6 @@ class ViewArranger(val field: FrameLayout, val dropListener: DropListener) {
                     .setDuration(200)
                     .start()
             }
-
 
         (view as MovableCraftView).setDropListener(dropListener)
     }

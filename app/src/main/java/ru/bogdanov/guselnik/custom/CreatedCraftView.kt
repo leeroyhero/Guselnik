@@ -2,6 +2,7 @@ package ru.bogdanov.guselnik.custom
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import ru.bogdanov.guselnik.R
 

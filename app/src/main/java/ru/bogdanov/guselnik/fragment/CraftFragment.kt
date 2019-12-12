@@ -49,7 +49,7 @@ class CraftFragment : Fragment(), DropListener {
 
     private fun createView(draft: CraftDraft) {
         val view = viewFactory.getView(draft.ingredient, context)
-        if (view != null) arranger.addView(view, draft)
+        if (view != null) arranger.arrangeView(view, draft)
     }
 
     private fun removeView(view: View) {
