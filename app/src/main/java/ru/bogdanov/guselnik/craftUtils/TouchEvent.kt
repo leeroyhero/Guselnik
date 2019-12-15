@@ -69,6 +69,7 @@ class TouchEvent(private val returnable: Boolean) {
     }
 
     fun setDropListener(listener: DropListener) {
+        if (dropListener==null)
         dropListener = listener
     }
 }

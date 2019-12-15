@@ -33,6 +33,7 @@ open class MovableCraftView @JvmOverloads constructor(
     }
 
     fun setDropListener(listener:DropListener){
+
         touchEvent.setDropListener(listener)
     }
 

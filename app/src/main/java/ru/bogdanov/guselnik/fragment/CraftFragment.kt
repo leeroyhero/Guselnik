@@ -4,8 +4,10 @@ package ru.bogdanov.guselnik.fragment
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_craft.*
 import kotlinx.android.synthetic.main.fragment_craft.view.*
 
@@ -18,11 +20,15 @@ import ru.bogdanov.guselnik.item.CraftDraft
 import ru.bogdanov.guselnik.viewModel.CraftViewModel
 
 class CraftFragment : Fragment(), DropListener {
-    val model = viewModels<CraftViewModel>()
+    val model = activityViewModels<CraftViewModel>()
     private val viewFactory = CraftViewFactory()
     private lateinit var arranger: ViewArranger
     private lateinit var collision: CollisionDetector
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,17 +40,17 @@ class CraftFragment : Fragment(), DropListener {
         view.chisel.setDropListener(this)
         arranger = ViewArranger(view.arrangeField, this)
         collision = CollisionDetector(view.arrangeField, arrayOf(view.forest, view.bonfire))
-        return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
         model.value.viewToRemove.observe(this, Observer { removeView(it) })
         model.value.viewToCreate.observe(this, Observer { createView(it) })
         model.value.newInstrument.observe(this, Observer {
             notification.show(it.label)
         })
+        return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
     }
 
     private fun createView(draft: CraftDraft) {

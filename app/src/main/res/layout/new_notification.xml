@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/notification_back">
+    android:layout_margin="8dp"
+    android:background="@drawable/notification_back"
+    android:elevation="4dp">
 
     <TextView
         android:id="@+id/textView4"

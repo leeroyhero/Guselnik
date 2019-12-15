@@ -5,7 +5,7 @@
     android:id="@+id/contentMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.CraftActivity">
+    tools:context=".activity.MainActivity">
 
     <fragment
         android:id="@+id/nav_craft_fragment"
@@ -17,6 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/craft_navigation" />
+        app:navGraph="@navigation/main_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

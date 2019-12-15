@@ -1,6 +1,5 @@
 package ru.bogdanov.guselnik.craftUtils
 
-import android.util.Log
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
@@ -16,20 +15,17 @@ class ViewArranger(val field: FrameLayout, val dropListener: DropListener) {
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
         )
+
+        view.visibility=View.INVISIBLE
+
         params.leftMargin = draft.xPos.toInt()
         params.topMargin = draft.yPos.toInt()
 
         field.addView(view, params)
 
-        if (draft.needToanimateDown)
-            view.post {
-                view.animate()
-                    .x(draft.xPos + Random.nextInt(-50, 50))
-                    .y(draft.yPos + 300f + Random.nextInt(-100, 100))
-                    .setInterpolator(DecelerateInterpolator())
-                    .setDuration(200)
-                    .start()
-            }
+        view.post{
+            view.setCorrectPosition(field, draft.needToanimateDown)
+        }
 
         (view as MovableCraftView).setDropListener(dropListener)
     }

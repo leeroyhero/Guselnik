@@ -1,6 +1,12 @@
 package ru.bogdanov.guselnik.item
 
 enum class Ingredient(val type: String, val label: String, val image: Int? = null, val isInstrument: Boolean=false){
+    AXE("axe", "Топор"),
+    KNIFE("knife","Нож"),
+    CHISEL("chisel","Долото"),
+    FOREST("forest", "Лес"),
+    BONFIRE("bonfire", "Костер"),
+
     POLENO("poleno", "Полено"),
     TROSTNIK("trostnik","Тростник"),
     BERESTA("beresta","Береста"),

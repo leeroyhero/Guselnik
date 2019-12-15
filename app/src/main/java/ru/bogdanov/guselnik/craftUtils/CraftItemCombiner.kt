@@ -5,8 +5,10 @@ import ru.bogdanov.guselnik.custom.CreatedCraftView
 import ru.bogdanov.guselnik.item.CraftDraft
 import ru.bogdanov.guselnik.item.CraftItem
 import ru.bogdanov.guselnik.item.Ingredient
+import ru.bogdanov.guselnik.item.Ingredient.*
+import javax.inject.Inject
 
-class CraftItemCombiner(val recipe: Recipe) {
+class CraftItemCombiner @Inject constructor (val recipe: Recipe) {
     fun combine(
         dropped: View,
         catcher: View,
@@ -28,7 +30,7 @@ class CraftItemCombiner(val recipe: Recipe) {
     private fun tryToDelete(dropped: View, catcher: View, catchType: String): Array<View>? {
         if (catcher is CreatedCraftView && isWorkTool(dropped)) return arrayOf(catcher)
 
-        if (catchType == BONFIRE || catchType == FOREST)
+        if (catchType == BONFIRE.type || catchType == FOREST.type)
             if (!isWorkTool(dropped))
             return arrayOf(dropped)
 
@@ -41,7 +43,7 @@ class CraftItemCombiner(val recipe: Recipe) {
 
     private fun isWorkTool(view: View): Boolean {
         val type=(view as CraftItem).type
-        return type == AXE || type == CHISEL || type == KNIFE
+        return type == AXE.type || type == CHISEL.type || type == KNIFE.type
     }
 
     private fun getDraft(
@@ -50,7 +52,7 @@ class CraftItemCombiner(val recipe: Recipe) {
         dropped: View,
         catcher: View
     ): CraftDraft {
-        val needToAnimateDown: Boolean = catchType == FOREST
+        val needToAnimateDown: Boolean = catchType == FOREST.type
         val coordinates = getCoordinates(dropped, catcher)
 
         return CraftDraft(
@@ -65,7 +67,7 @@ class CraftItemCombiner(val recipe: Recipe) {
         dropped: View,
         catcher: View
     ): Pair<Float, Float> {
-        if ((catcher as CraftItem).type == FOREST) return dropped.getCenter()
+        if ((catcher as CraftItem).type == FOREST.type) return dropped.getCenter()
         else {
             val coord1 = dropped.getCenter()
             val coord2 = catcher.getCenter()
@@ -78,7 +80,7 @@ class CraftItemCombiner(val recipe: Recipe) {
     }
 
     private fun tryBurnInBonFire(dropped: View, catchType: String): Array<View>? {
-        if (catchType == BONFIRE) return arrayOf(dropped)
+        if (catchType == BONFIRE.type) return arrayOf(dropped)
         return null
     }
 }

@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="130dp"
     android:layout_height="48dp"
-    android:background="@drawable/craft_view_back">
+    android:background="@drawable/craft_view_back"
+    android:outlineProvider="paddedBounds">
 
     <TextView
         android:id="@+id/textViewName"
