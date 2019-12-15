@@ -18,13 +18,10 @@ class ViewArranger(val field: FrameLayout, val dropListener: DropListener) {
 
         view.visibility=View.INVISIBLE
 
-        params.leftMargin = draft.xPos.toInt()
-        params.topMargin = draft.yPos.toInt()
-
-        field.addView(view, params)
+        field.addView(view)
 
         view.post{
-            view.setCorrectPosition(field, draft.needToanimateDown)
+            view.setCorrectPosition(draft, field)
         }
 
         (view as MovableCraftView).setDropListener(dropListener)
