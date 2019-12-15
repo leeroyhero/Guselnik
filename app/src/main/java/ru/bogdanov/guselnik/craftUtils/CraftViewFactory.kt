@@ -9,7 +9,7 @@ import ru.bogdanov.guselnik.item.CraftItem
 import ru.bogdanov.guselnik.item.Ingredient
 
 class CraftViewFactory {
-    fun getView(ingredient: Ingredient, context: Context?): View? {
+    fun getView(ingredient: Ingredient, context: Context?): CreatedCraftView? {
         if (context == null) return null
 
         return when (ingredient.isInstrument) {

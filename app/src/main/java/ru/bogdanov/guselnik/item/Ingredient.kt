@@ -82,6 +82,7 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
     GARMON_SARATOV("garmon_saratov", "Гармонь саратовская", isInstrument = true),
 
     DOSKA("doska", "Доска"),
+    KRICA("krica", "Крица"),
     DEKA("deka", "Дэка"),
     LOPATA("lopata", "Лопата"),
     KOPIE("kopie", "Копье"),
@@ -90,5 +91,9 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
     SILKI("silki", "Силки"),
     PERO("pero", "Перо"),
     ZEMLYA("zemlya", "Земля"),
-    VOLOS("volos", "Волос")
+    VOLOS("volos", "Волос");
+
+    override fun toString(): String {
+        return type
+    }
 }
