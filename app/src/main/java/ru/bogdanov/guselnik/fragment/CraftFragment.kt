@@ -49,17 +49,19 @@ class CraftFragment : Fragment(), DropListener {
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
     private fun createView(draft: CraftDraft) {
         val view = viewFactory.getView(draft.ingredient, context)
         if (view != null) arranger.arrangeView(view, draft)
     }
 
     private fun removeView(view: View) {
-        arrangeField.removeView(view)
+        view.animate()
+            .setDuration(300)
+            .alpha(0f)
+            .scaleX(0.6f)
+            .scaleY(0.6f)
+            .withEndAction { arrangeField.removeView(view) }
+            .start()
     }
 
     override fun dropped(droppedView: View) {

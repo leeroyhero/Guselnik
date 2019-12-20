@@ -2,6 +2,7 @@ package ru.bogdanov.guselnik.craftUtils
 
 import android.view.View
 import ru.bogdanov.guselnik.custom.CreatedCraftView
+import ru.bogdanov.guselnik.item.AnimVector
 import ru.bogdanov.guselnik.item.CraftDraft
 import ru.bogdanov.guselnik.item.CraftItem
 import ru.bogdanov.guselnik.item.Ingredient
@@ -52,14 +53,18 @@ class CraftItemCombiner @Inject constructor (val recipe: Recipe) {
         dropped: View,
         catcher: View
     ): CraftDraft {
-        val needToAnimateDown: Boolean = catchType == FOREST.type
+
         val coordinates = getCoordinates(dropped, catcher)
 
         return CraftDraft(
             ingredient,
             coordinates.first,
             coordinates.second,
-            needToAnimateDown
+            when (catchType){
+                FOREST.type->AnimVector.FOREST
+                BONFIRE.type->AnimVector.BONFIRE
+                else->AnimVector.NONE
+            }
         )
     }
 

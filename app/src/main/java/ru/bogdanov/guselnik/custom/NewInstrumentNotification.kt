@@ -14,18 +14,15 @@ class NewInstrumentNotification @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    val view= View.inflate(context, R.layout.new_notification, this)
+    val view = View.inflate(context, R.layout.new_notification, this)
 
-    init {
-        alpha=0f
-    }
-
-    fun show(name:String){
-        alpha=0f
-        view.textViewInstrumentName.text=name
+    fun show(name: String) {
+        alpha = 0f
+        view.textViewInstrumentName.text = name
 
         animate()
             .alpha(1f)
+            .withStartAction { visibility=View.VISIBLE }
             .setDuration(200)
             .start()
         MainScope().launch {
@@ -33,6 +30,7 @@ class NewInstrumentNotification @JvmOverloads constructor(
             animate()
                 .alpha(0f)
                 .setDuration(200)
+                .withEndAction { visibility=View.GONE }
                 .start()
         }
     }

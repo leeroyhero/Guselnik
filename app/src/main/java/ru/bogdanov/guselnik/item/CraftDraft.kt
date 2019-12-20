@@ -6,5 +6,5 @@ data class CraftDraft(
     val ingredient: Ingredient,
     val xPos: Float,
     val yPos: Float,
-    val needToanimateDown:Boolean
+    val animVector: AnimVector
 )

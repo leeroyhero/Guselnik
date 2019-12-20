@@ -4,6 +4,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import ru.bogdanov.guselnik.interfaces.DropListener
+import ru.bogdanov.guselnik.utils.log
 
 class TouchEvent(private val returnable: Boolean) {
     private var dX = 0f
@@ -17,22 +18,26 @@ class TouchEvent(private val returnable: Boolean) {
 
     val touchListener = object : View.OnTouchListener {
         override fun onTouch(v: View, event: MotionEvent): Boolean {
+
             return touchEvent(v, event)
         }
     }
 
     private fun touchEvent(v: View, event: MotionEvent): Boolean {
+        log(v.toString())
         if (!canTouch) return false
         else
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    v.z=30f
+                    v.z=15f
 
                     startX = v.x
                     startY = v.y
 
                     dX = v.x - event.rawX
                     dY = v.y - event.rawY
+
+                    animateScale(v, 1.05f)
                     return true
                 }
                 MotionEvent.ACTION_MOVE -> {
@@ -50,11 +55,22 @@ class TouchEvent(private val returnable: Boolean) {
 
                     dropListener?.dropped(v)
 
+                    animateScale(v, 1f)
+
                     if (returnable) returnBack(v)
                     return true
                 }
                 else -> return false
             }
+    }
+
+    private fun animateScale(view:View, scale:Float){
+        view.animate()
+            .setDuration(200)
+            .setInterpolator(DecelerateInterpolator())
+            .scaleX(scale)
+            .scaleY(scale)
+            .start()
     }
 
     private fun returnBack(v: View) {

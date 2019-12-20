@@ -2,13 +2,13 @@ package ru.bogdanov.guselnik.custom
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
 import ru.bogdanov.guselnik.R
-import ru.bogdanov.guselnik.craftUtils.getCenter
+import ru.bogdanov.guselnik.item.AnimVector
 import ru.bogdanov.guselnik.item.CraftDraft
+import ru.bogdanov.guselnik.utils.pixToDp
 import kotlin.random.Random
 
 class CreatedCraftView @JvmOverloads constructor(
@@ -18,17 +18,18 @@ class CreatedCraftView @JvmOverloads constructor(
 
     init {
         view = View.inflate(context, R.layout.created_craft_view, this)
-        view.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+        layoutParams = LayoutParams(130.pixToDp(context), 48.pixToDp(context))
+        setBackgroundResource(R.drawable.craft_view_back)
     }
 
-    fun setCorrectPosition(draft:CraftDraft, field: FrameLayout) {
-        if (draft.needToanimateDown)
+    fun setCorrectPosition(draft: CraftDraft, field: FrameLayout) {
+        if (draft.animVector != AnimVector.NONE)
             post {
-                x=draft.xPos-width/2
-                y=draft.yPos-height/2
+                x = draft.xPos - width / 2
+                y = draft.yPos - height / 2
                 animate()
-                    .x(x + Random.nextInt(-50, 50))
-                    .y(y + 400f + Random.nextInt(-100, 100))
+                    .x(x + draft.animVector.x + Random.nextInt(-50, 50))
+                    .y(y + draft.animVector.y + Random.nextInt(-50, 50))
                     .setInterpolator(DecelerateInterpolator())
                     .setDuration(200)
                     .withStartAction {
@@ -38,12 +39,12 @@ class CreatedCraftView @JvmOverloads constructor(
             }
         else {
             post {
-                if (x+width>field.width){
-                    x=(field.width-width/2-50).toFloat()
-                    y=draft.yPos-height/2
-                }else{
-                    x=draft.xPos-width/2
-                    y=draft.yPos-height/2
+                if (x + width > field.width) {
+                    x = (field.width - width / 2 - 50).toFloat()
+                    y = draft.yPos - height / 2
+                } else {
+                    x = draft.xPos - width / 2
+                    y = draft.yPos - height / 2
                 }
                 visibility = View.VISIBLE
             }
