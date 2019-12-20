@@ -18,7 +18,6 @@ class TouchEvent(private val returnable: Boolean) {
 
     val touchListener = object : View.OnTouchListener {
         override fun onTouch(v: View, event: MotionEvent): Boolean {
-
             return touchEvent(v, event)
         }
     }
