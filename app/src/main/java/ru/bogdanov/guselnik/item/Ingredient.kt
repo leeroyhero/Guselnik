@@ -70,7 +70,7 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
     SVISTULKA("svistulka","Свистулька", isInstrument = true),
     POSVISTEL("posvistel","Посвистель", isInstrument = true),
     PISHIK("pishik","Пищик", isInstrument = true),
-    GALEYKA("galeyka","Жалейка", isInstrument = true),
+    BRELKA("brelka","Брёлка", isInstrument = true),
     SURNA("surna","Сурна", isInstrument = true),
     YAZICHOK("yazichok", "Язычок"),
     NEREHT_ROGOK("nereht_rogok", "Нерехтинский рожок", isInstrument = true),
@@ -97,7 +97,14 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
     SILKI("silki", "Силки"),
     PERO("pero", "Перо"),
     ZEMLYA("zemlya", "Земля"),
-    VOLOS("volos", "Волос");
+    VOLOS("volos", "Волос"),
+    TRUBKA_S_OTVERSTIAYAMI("trubka_holed", "Трубка с отверстиями"),
+    DEKA_S_OTVERSTIAYAMI("deka_holed","Дека с отверстиями"),
+    KORITSE_S_OKNOM("koritse_window","Корытце с окном"),
+    PROBKA("probka","Пробка-пыж"),
+    GALEYKA_DVOYNAYA("galeyka_double","Двойная жалейка", isInstrument = true),
+    KOBZA("kobza","Кобза", isInstrument = true),
+    FUYARA("fuyara","Фуяра", isInstrument = true);
 
     override fun toString(): String {
         return type
