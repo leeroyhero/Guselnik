@@ -41,6 +41,8 @@ class CraftFragment : Fragment(), DropListener {
         arranger = ViewArranger(view.arrangeField, this)
         collision = CollisionDetector(view.arrangeField, arrayOf(view.forest, view.bonfire))
 
+        view.buttonPlayInstruments.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_craftFragment_to_playFragment))
+
         model.value.viewToRemove.observe(this, Observer { removeView(it) })
         model.value.viewToCreate.observe(this, Observer { createView(it) })
         model.value.newInstrument.observe(this, Observer {

@@ -16,8 +16,6 @@ open class MovableCraftView @JvmOverloads constructor(
     private val touchEvent:TouchEvent
 
     override var type: String= NONE
-        get() = field
-        set(value) {field=value}
 
     init {
         if (attrs != null) {

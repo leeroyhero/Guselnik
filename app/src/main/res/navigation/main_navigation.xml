@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_craftFragment_to_recipesFragment"
             app:destination="@id/recipesFragment" />
+        <action
+            android:id="@+id/action_craftFragment_to_playFragment"
+            app:destination="@id/playFragment" />
     </fragment>
     <fragment
         android:id="@+id/recipesFragment"
         android:name="ru.bogdanov.guselnik.fragment.RecipesFragment"
         android:label="fragment_recipes"
         tools:layout="@layout/fragment_recipes" />
+    <fragment
+        android:id="@+id/playFragment"
+        android:name="ru.bogdanov.guselnik.fragment.PlayFragment"
+        android:label="fragment_play"
+        tools:layout="@layout/fragment_play" />
 </navigation>

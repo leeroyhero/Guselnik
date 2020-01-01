@@ -12,8 +12,6 @@ class FieldObject @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr), CraftItem {
 
     override var type: String= NONE
-        get() = field
-        set(value) {field=value}
 
     init {
         if (attrs != null) {
