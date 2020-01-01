@@ -19,7 +19,6 @@ class Sound(val context: Context) {
         val audios= mutableListOf<Int>()
         var loadCount=0
         soundPool.setOnLoadCompleteListener { soundPool, sampleId, status ->
-            Log.d("sound", "loaded: $sampleId")
             if (status==0){
                 loadCount++
                 if (loadCount==ids.size)
