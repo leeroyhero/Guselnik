@@ -16,7 +16,12 @@ class CraftViewModel : ViewModel() {
     val viewToCreate = MutableLiveData<CraftDraft>()
     val newInstrument = MutableLiveData<Ingredient>()
 
-    private val combiner: CraftItemCombiner = App.appComponent.gerItemCombiner()
+    @Inject
+    lateinit var combiner: CraftItemCombiner
+
+    init {
+        App.appComponent.inject(this)
+    }
 
     fun collisionDetected(dropped: View, catcher: View) {
         combiner.combine(dropped, catcher) { draft, arrayToDelete ->
