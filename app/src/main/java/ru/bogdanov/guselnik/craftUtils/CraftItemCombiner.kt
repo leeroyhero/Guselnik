@@ -8,7 +8,9 @@ import ru.bogdanov.guselnik.item.CraftItem
 import ru.bogdanov.guselnik.item.Ingredient
 import ru.bogdanov.guselnik.item.Ingredient.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CraftItemCombiner @Inject constructor (val recipe: Recipe) {
     fun combine(
         dropped: View,

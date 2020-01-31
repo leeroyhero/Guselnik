@@ -3,12 +3,15 @@ package ru.bogdanov.guselnik.craftUtils
 import ru.bogdanov.guselnik.item.Ingredient
 import ru.bogdanov.guselnik.item.Ingredient.*
 import ru.bogdanov.guselnik.item.RecipeItem
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.math.max
 import kotlin.math.min
 
 val NONE = "none"
 
-class Recipe {
+@Singleton
+class Recipe @Inject constructor() {
     val recipeMap = mutableMapOf<String, Ingredient>()
     val recipeItemList = mutableListOf<RecipeItem>()
 
