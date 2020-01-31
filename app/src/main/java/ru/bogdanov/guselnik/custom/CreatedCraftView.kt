@@ -18,7 +18,7 @@ class CreatedCraftView @JvmOverloads constructor(
 
     init {
         view = View.inflate(context, R.layout.created_craft_view, this)
-        layoutParams = LayoutParams(130.pixToDp(context), 48.pixToDp(context))
+        layoutParams = LayoutParams(80.pixToDp(context), 80.pixToDp(context))
         setBackgroundResource(R.drawable.craft_view_back)
     }
 

@@ -85,7 +85,7 @@ class CraftItemCombiner @Inject constructor (val recipe: Recipe) {
     }
 
     private fun tryBurnInBonFire(dropped: View, catchType: String): Array<View>? {
-        if (catchType == BONFIRE.type) return arrayOf(dropped)
+        if (catchType == BONFIRE.type&&!isWorkTool(dropped)) return arrayOf(dropped)
         return null
     }
 }

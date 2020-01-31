@@ -1,6 +1,8 @@
 package ru.bogdanov.guselnik.item
 
-enum class Ingredient(val type: String, val label: String, val image: Int? = null, val isInstrument: Boolean=false){
+import ru.bogdanov.guselnik.R
+
+enum class Ingredient(val type: String, val label: String, val image: Int? = null, val isInstrument: Boolean=false, val sound:Int?=null){
     AXE("axe", "Топор"),
     KNIFE("knife","Нож"),
     CHISEL("chisel","Долото"),
@@ -15,7 +17,7 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
 
     SPOON("spoon", "Ложка"),
 
-    SPOONS("spoons", "Ложки", isInstrument = true),
+    SPOONS("spoons", "Ложки", isInstrument = true, sound = R.raw.logki),
     SHANKUNOK("sharkunok","Шаркунок", isInstrument = true),
     TRESHETKA("treshetka","Трещетка",isInstrument = true),
     SHEPKA("shepka","Щепка"),
@@ -42,7 +44,7 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
     KORPUS("korpus","Корпус"),
     BUBEN("buben","Бубен", isInstrument = true),
     KOLOKOLCHIK("kolokolchik","Колокольчик",isInstrument = true),
-    KORITSE("koritse","Корытце",isInstrument = true),
+    KORITSE("koritse","Корытце"),
     KOGA("koga","Кожа"),
     RASPLAV("rasplav","Расплав"),
     GLINA("glina","Глина"),
@@ -53,18 +55,18 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
     GUSLI_LIROOBR("gusli_liroobr","Гусли лирообразные",isInstrument = true),
     KORPUS_WINDOW("korpus_window","Корпус с окном"),
     STRUNA("struna","Струна"),
-    GUSLI_KRIL("gusli_kril","Гусли крыловидные",isInstrument = true),
+    GUSLI_KRIL("gusli_kril","Гусли крыловидные",isInstrument = true, sound = R.raw.gusli1),
     GUSLI_PSALTIR("gusli_psaltir","Гусли псалтырь", isInstrument = true),
     CIMBALI("cimbali","Цимбалы",isInstrument = true),
     BANDURA("bandura","Бандура", isInstrument = true),
     GRIF("grif","Гриф"),
-    BALALAYKA("balalayka","Балалайка",isInstrument = true),
+    BALALAYKA("balalayka","Балалайка",isInstrument = true, sound = R.raw.balalayka),
     KORPUS_HOLED("korpus_holed","Корпус с отверстием"),
     DOMRA("domra","Домра", isInstrument = true),
     GUDOK("gudok","Гудок", isInstrument = true),
     SKRIPKA_NARODNAYA("skripka_nar","Скрипка народная", isInstrument = true),
     KUKIGL("kukigl","Кукиглы",isInstrument = true),
-    KALUKA("kaluka","Калюка",isInstrument = true),
+    KALUKA("kaluka","Калюка",isInstrument = true, sound = R.raw.kaluka),
     SOPEL("sopel","Сопель", isInstrument = true),
     SWIREL_DWOY("swirel_dwoy","Свирель двойчатка", isInstrument = true),
     SVISTULKA("svistulka","Свистулька", isInstrument = true),
@@ -109,4 +111,9 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
     override fun toString(): String {
         return type
     }
+}
+
+fun getIngredientByType(type:String):Ingredient?{
+    val ingr=Ingredient.values().find { it.type==type }
+    return ingr
 }

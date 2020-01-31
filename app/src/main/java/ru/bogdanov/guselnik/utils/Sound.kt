@@ -4,14 +4,17 @@ import android.content.Context
 import android.media.AudioAttributes
 import android.media.SoundPool
 import android.util.Log
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Sound(val context: Context) {
+@Singleton
+class Sound @Inject constructor(val context: Context) {
     private val soundPool=SoundPool.Builder()
         .setAudioAttributes(AudioAttributes.Builder()
             .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
             .setUsage(AudioAttributes.USAGE_MEDIA)
             .build())
-        .setMaxStreams(5)
+        .setMaxStreams(4)
         .build()
     private val streams= mutableListOf<Int>()
 
