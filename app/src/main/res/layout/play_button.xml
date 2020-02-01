@@ -9,7 +9,14 @@
         android:id="@+id/playButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#B8B3B3">
+        android:background="#EBEBEB">
+
+        <ImageView
+            android:id="@+id/imageViewIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@color/colorPrimaryDark" />
 
         <ProgressBar
             android:id="@+id/progressBar"

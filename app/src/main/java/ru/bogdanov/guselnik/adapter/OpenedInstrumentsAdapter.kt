@@ -10,6 +10,12 @@ import ru.bogdanov.guselnik.item.Ingredient
 
 class OpenedInstrumentsAdapter(val array: Array<Ingredient>):
     RecyclerView.Adapter<OpenedInstrumentsAdapter.OpenedInstrumentViewHolder>() {
+    private var listener:InstrumentChoseListener?=null
+
+    fun setChoseListener(instrumentChoseListener: InstrumentChoseListener){
+        listener=instrumentChoseListener
+    }
+
     class OpenedInstrumentViewHolder(val view: View):RecyclerView.ViewHolder(view){
         val icon=view.imageViewIcon
         val name=view.textViewName
@@ -30,5 +36,12 @@ class OpenedInstrumentsAdapter(val array: Array<Ingredient>):
         val ingredient=array[position]
 
         holder.name.text=ingredient.label
+        if (ingredient.image!=null) holder.icon.setImageResource(ingredient.image)
+        holder.itemView.setOnClickListener { listener?.chosen(ingredient) }
+    }
+
+    interface InstrumentChoseListener{
+        fun chosen(ingredient: Ingredient)
     }
 }
+

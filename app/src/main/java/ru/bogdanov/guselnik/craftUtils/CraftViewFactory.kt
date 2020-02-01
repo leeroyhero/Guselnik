@@ -12,24 +12,14 @@ class CraftViewFactory {
     fun getView(ingredient: Ingredient, context: Context?): CreatedCraftView? {
         if (context == null) return null
 
-        return when (ingredient.isInstrument) {
-            false -> getIngredientsView(ingredient, context)
-            true -> getInstrumentView(ingredient, context)
-        }
+        return getCreatedView(ingredient, context)
     }
 
-    private fun getInstrumentView(item: Ingredient, context: Context): CreatedCraftView {
+    private fun getCreatedView(item: Ingredient, context: Context): CreatedCraftView {
         val view = CreatedCraftView(context)
         (view as CraftItem).type = item.type
-        view.textViewName.text = item.label
+        view.setInfo(item)
 
-        return view
-    }
-
-    private fun getIngredientsView(item: Ingredient, context: Context): CreatedCraftView {
-        val view = CreatedCraftView(context)
-        (view as CraftItem).type = item.type
-        view.textViewName.text = item.label
         return view
     }
 }

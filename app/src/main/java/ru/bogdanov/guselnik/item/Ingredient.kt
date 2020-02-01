@@ -9,7 +9,7 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
     FOREST("forest", "Лес"),
     BONFIRE("bonfire", "Костер"),
 
-    POLENO("poleno", "Полено"),
+    POLENO("poleno", "Полено", image = R.drawable.brevno),
     TROSTNIK("trostnik","Тростник"),
     BERESTA("beresta","Береста"),
 
@@ -17,7 +17,7 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
 
     SPOON("spoon", "Ложка"),
 
-    SPOONS("spoons", "Ложки", isInstrument = true, sound = R.raw.logki),
+    SPOONS("spoons", "Ложки", isInstrument = true, sound = R.raw.logki, image = R.drawable.logki),
     SHANKUNOK("sharkunok","Шаркунок", isInstrument = true),
     TRESHETKA("treshetka","Трещетка",isInstrument = true),
     SHEPKA("shepka","Щепка"),
@@ -66,7 +66,7 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
     GUDOK("gudok","Гудок", isInstrument = true),
     SKRIPKA_NARODNAYA("skripka_nar","Скрипка народная", isInstrument = true),
     KUKIGL("kukigl","Кукиглы",isInstrument = true),
-    KALUKA("kaluka","Калюка",isInstrument = true, sound = R.raw.kaluka),
+    KALUKA("kaluka","Калюка",isInstrument = true, sound = R.raw.kaluka, image = R.drawable.kaluka),
     SOPEL("sopel","Сопель", isInstrument = true),
     SWIREL_DWOY("swirel_dwoy","Свирель двойчатка", isInstrument = true),
     SVISTULKA("svistulka","Свистулька", isInstrument = true),
@@ -89,7 +89,7 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
     MEHA("meha", "Меха"),
     GARMON_SARATOV("garmon_saratov", "Гармонь саратовская", isInstrument = true),
 
-    DOSKA("doska", "Доска"),
+    DOSKA("doska", "Доска", image = R.drawable.doski),
     KRICA("krica", "Крица"),
     DEKA("deka", "Дэка"),
     LOPATA("lopata", "Лопата"),

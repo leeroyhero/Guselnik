@@ -20,13 +20,18 @@ import ru.bogdanov.guselnik.R
 import ru.bogdanov.guselnik.adapter.OpenedInstrumentsAdapter
 import ru.bogdanov.guselnik.craftUtils.MusicInstruments
 import ru.bogdanov.guselnik.custom.PlayButton
+import ru.bogdanov.guselnik.item.Ingredient
 import ru.bogdanov.guselnik.utils.Sound
 import javax.inject.Inject
 
 
 class PlayFragment : Fragment() {
-    @Inject lateinit var sound: Sound
-    @Inject lateinit var musicInstruments: MusicInstruments
+    @Inject
+    lateinit var sound: Sound
+    @Inject
+    lateinit var musicInstruments: MusicInstruments
+
+    private var adapter:OpenedInstrumentsAdapter?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,24 +49,40 @@ class PlayFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         setupOpenedInstruments()
 
-        playButton1.setOnClickListener { showOpenedInstruments() }
-        playButton2.setOnClickListener { hideOpenedInstruments() }
+        hideOpenedInstruments()
+        playButton1.setOnClickListener { showOpenedInstruments(it as PlayButton) }
+        playButton2.setOnClickListener { showOpenedInstruments(it as PlayButton) }
+        playButton3.setOnClickListener { showOpenedInstruments(it as PlayButton) }
+        playButton4.setOnClickListener { showOpenedInstruments(it as PlayButton) }
     }
 
     private fun setupOpenedInstruments() {
-        recyclerOpenedInstruments.layoutManager=GridLayoutManager(context, 2, RecyclerView.HORIZONTAL, false)
+        recyclerOpenedInstruments.layoutManager =
+            GridLayoutManager(context, 2, RecyclerView.HORIZONTAL, false)
         MainScope().launch {
-            val arr=musicInstruments.getOpenedInstruments()
-            if (arr!=null) recyclerOpenedInstruments.adapter=OpenedInstrumentsAdapter(arr)
+            val arr = musicInstruments.getOpenedInstruments()
+            if (arr != null) {
+                adapter=OpenedInstrumentsAdapter(arr)
+                recyclerOpenedInstruments.adapter = adapter
+            }
         }
     }
 
-    private fun showOpenedInstruments(){
+    private fun showOpenedInstruments(button:PlayButton) {
+        adapter?.setChoseListener(object : OpenedInstrumentsAdapter.InstrumentChoseListener {
+            override fun chosen(ingredient: Ingredient) {
+                hideOpenedInstruments()
+                button.instrumentChosen(ingredient)
+            }
+        })
+
         chooseInstrumentLayout.animate()
             .withStartAction {
-                chooseInstrumentLayout.alpha=0f
-                chooseInstrumentLayout.visibility=View.VISIBLE
-                chooseInstrumentLayout.translationY=200f
+                chooseInstrumentLayout.apply {
+                    alpha = 0f
+                    translationY = 200f
+                    visibility = View.VISIBLE
+                }
             }
             .setInterpolator(DecelerateInterpolator())
             .alpha(1f)
@@ -70,10 +91,10 @@ class PlayFragment : Fragment() {
             .start()
     }
 
-    private fun hideOpenedInstruments(){
+    private fun hideOpenedInstruments() {
         chooseInstrumentLayout.animate()
             .withEndAction {
-                chooseInstrumentLayout.visibility=View.INVISIBLE
+                chooseInstrumentLayout.visibility = View.INVISIBLE
             }
             .setInterpolator(AccelerateInterpolator())
             .alpha(0f)

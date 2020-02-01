@@ -5,9 +5,11 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
+import kotlinx.android.synthetic.main.created_craft_view.view.*
 import ru.bogdanov.guselnik.R
 import ru.bogdanov.guselnik.item.AnimVector
 import ru.bogdanov.guselnik.item.CraftDraft
+import ru.bogdanov.guselnik.item.Ingredient
 import ru.bogdanov.guselnik.utils.pixToDp
 import kotlin.random.Random
 
@@ -18,8 +20,12 @@ class CreatedCraftView @JvmOverloads constructor(
 
     init {
         view = View.inflate(context, R.layout.created_craft_view, this)
-        layoutParams = LayoutParams(80.pixToDp(context), 80.pixToDp(context))
-        setBackgroundResource(R.drawable.craft_view_back)
+        layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+    }
+
+    fun setInfo(ingredient: Ingredient) {
+        view.textViewName.text = ingredient.label
+        if (ingredient.image != null) view.imageViewIngredientIcon.setImageResource(ingredient.image)
     }
 
     fun setCorrectPosition(draft: CraftDraft, field: FrameLayout) {

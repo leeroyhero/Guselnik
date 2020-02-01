@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_craft.*
@@ -15,11 +14,13 @@ import ru.bogdanov.guselnik.R
 import ru.bogdanov.guselnik.craftUtils.CollisionDetector
 import ru.bogdanov.guselnik.craftUtils.CraftViewFactory
 import ru.bogdanov.guselnik.craftUtils.ViewArranger
+import ru.bogdanov.guselnik.interfaces.CraftListener
 import ru.bogdanov.guselnik.interfaces.DropListener
 import ru.bogdanov.guselnik.item.CraftDraft
+import ru.bogdanov.guselnik.item.Ingredient
 import ru.bogdanov.guselnik.viewModel.CraftViewModel
 
-class CraftFragment : Fragment(), DropListener {
+class CraftFragment : Fragment(), DropListener, CraftListener {
     val model = activityViewModels<CraftViewModel>()
     private val viewFactory = CraftViewFactory()
     private lateinit var arranger: ViewArranger
@@ -43,20 +44,16 @@ class CraftFragment : Fragment(), DropListener {
 
         view.buttonPlayInstruments.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_craftFragment_to_playFragment))
 
-        model.value.viewToRemove.observe(this, Observer { removeView(it) })
-        model.value.viewToCreate.observe(this, Observer { createView(it) })
-        model.value.newInstrument.observe(this, Observer {
-            notification.show(it.label)
-        })
+        model.value.setCraftListener(this)
         return view
     }
 
-    private fun createView(draft: CraftDraft) {
+    override fun createView(draft: CraftDraft) {
         val view = viewFactory.getView(draft.ingredient, context)
         if (view != null) arranger.arrangeView(view, draft)
     }
 
-    private fun removeView(view: View) {
+    override fun removeView(view: View) {
         view.animate()
             .setDuration(300)
             .alpha(0f)
@@ -64,6 +61,10 @@ class CraftFragment : Fragment(), DropListener {
             .scaleY(0.6f)
             .withEndAction { arrangeField.removeView(view) }
             .start()
+    }
+
+    override fun newInstrumentOpened(ingredient: Ingredient) {
+        notification.show(ingredient.label)
     }
 
     override fun dropped(droppedView: View) {
