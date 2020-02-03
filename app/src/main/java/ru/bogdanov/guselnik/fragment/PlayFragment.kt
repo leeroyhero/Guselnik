@@ -19,6 +19,7 @@ import ru.bogdanov.guselnik.App
 import ru.bogdanov.guselnik.R
 import ru.bogdanov.guselnik.adapter.OpenedInstrumentsAdapter
 import ru.bogdanov.guselnik.craftUtils.MusicInstruments
+import ru.bogdanov.guselnik.custom.MusicPlayer
 import ru.bogdanov.guselnik.custom.PlayButton
 import ru.bogdanov.guselnik.item.Ingredient
 import ru.bogdanov.guselnik.utils.Sound
@@ -50,10 +51,27 @@ class PlayFragment : Fragment() {
         setupOpenedInstruments()
 
         hideOpenedInstruments()
-        playButton1.setOnClickListener { showOpenedInstruments(it as PlayButton) }
-        playButton2.setOnClickListener { showOpenedInstruments(it as PlayButton) }
-        playButton3.setOnClickListener { showOpenedInstruments(it as PlayButton) }
-        playButton4.setOnClickListener { showOpenedInstruments(it as PlayButton) }
+
+        musicPlayer.setListener(musicListener)
+    }
+
+    val musicListener= object : MusicPlayer.MusicPlayerListener {
+        override fun pause() {
+            sound.release()
+        }
+
+        override fun play(audiosArray: Array<Int?>) {
+            sound.load(audiosArray)
+        }
+
+        override fun editInstrument(index: Int, instrumentView: PlayButton) {
+            showOpenedInstruments(instrumentView)
+        }
+
+        override fun volumeChanged(index: Int, volume: Float) {
+
+        }
+
     }
 
     private fun setupOpenedInstruments() {

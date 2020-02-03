@@ -12,13 +12,18 @@ class PlayButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    lateinit var view: View
+    private val view: View
+    private var ingredient:Ingredient?=null
     init {
         view= View.inflate(context, R.layout.play_button, this)
         orientation=LinearLayout.VERTICAL
     }
 
     fun instrumentChosen(ingredient: Ingredient) {
+        this.ingredient=ingredient
+
         if (ingredient.image!=null) view.imageViewIcon.setImageResource(ingredient.image)
     }
+
+    fun getIngredient()=ingredient
 }

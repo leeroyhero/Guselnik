@@ -8,8 +8,7 @@
     <ru.bogdanov.guselnik.custom.SquareFrameLayout
         android:id="@+id/playButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#EBEBEB">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageViewIcon"
@@ -42,4 +41,10 @@
             android:layout_gravity="center"
             app:srcCompat="@drawable/ic_delete_forever_white_24dp" />
     </FrameLayout>
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="10" />
 </merge>
