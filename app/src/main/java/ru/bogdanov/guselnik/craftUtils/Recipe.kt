@@ -39,7 +39,7 @@ class Recipe @Inject constructor() {
         addToRecipeMap(YAZUCHEK_METAL, POKOVKA, VARGAN)
         addToRecipeMap(BARABAN, SMYK, GUSACHOK)
         addToRecipeMap(KOST, GILA, BRUNCHALKA)
-        addToRecipeMap(LITIE, KORITSE_VODA, ZVENIASHIE_PRIVESI)
+        addToRecipeMap(RASPLAV, KORITSE_VODA, ZVENIASHIE_PRIVESI)
         addToRecipeMap(POLENO, POLENO, DROVA)
         addToRecipeMap(KORPUS, PALKA, KOLOTUSHKA)
         addToRecipeMap(BARABAN, KOLOKOLCHIK, BUBEN)

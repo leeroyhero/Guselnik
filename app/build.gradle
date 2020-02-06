@@ -11,8 +11,8 @@ android {
         applicationId "ru.bogdanov.guselnik"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3
-        versionName "1.002"
+        versionCode 4
+        versionName "1.003"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

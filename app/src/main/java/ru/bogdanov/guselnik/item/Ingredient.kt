@@ -61,7 +61,6 @@ enum class Ingredient(val type: String, val label: String, val image: Int? = nul
     KOST("kost","Кость", image = R.drawable.kost),
     KRICA("krica", "Крица", image = R.drawable.kritsa),
     KUKIGL("kukigl","Кукиглы",isInstrument = true, image = R.drawable.kugikly),
-    LITIE("litie","Литье"),
     LOPATA("lopata", "Лопата", image = R.drawable.lopata),
     LUK("luk", "Лук", image = R.drawable.luk),
     MEHA("meha", "Меха", image = R.drawable.mekha),
