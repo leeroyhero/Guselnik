@@ -11,37 +11,47 @@ import ru.bogdanov.guselnik.item.Ingredient
 class MusicPlayer @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
-    private var listener:MusicPlayerListener?=null
-    private val view:View
-    private var isPlaying=false
+    private var listener: MusicPlayerListener? = null
+    private val view: View
+    private var isPlaying = false
+    private val instrButtonArray: Array<PlayButton>
+
     init {
-        view= inflate(context, R.layout.music_player, this)
+        view = inflate(context, R.layout.music_player, this)
         buttonPlay.setOnClickListener { buttonPlayClicked() }
 
-        instrumentButton0.setOnClickListener { instrumentButtonClicked(instrumentButton0, 0) }
-        instrumentButton1.setOnClickListener { instrumentButtonClicked(instrumentButton1, 1) }
-        instrumentButton2.setOnClickListener { instrumentButtonClicked(instrumentButton2, 2) }
-        instrumentButton3.setOnClickListener { instrumentButtonClicked(instrumentButton3, 3) }
+        instrButtonArray = arrayOf(
+            instrumentButton0, instrumentButton1, instrumentButton2, instrumentButton3
+        )
+        instrButtonArray.forEachIndexed { index, playButton ->
+            playButton.setOnClickListener {
+                instrumentButtonClicked(playButton, index)
+            }
+            playButton.volumeListener {
+                if (playButton.getIngredient()?.sound != null)
+                    listener?.volumeChanged(index, it)
+            }
+        }
     }
 
     private fun instrumentButtonClicked(instrumentButton: PlayButton, index: Int) {
-        if (!isPlaying){
+        if (!isPlaying) {
             listener?.editInstrument(index, instrumentButton)
         }
     }
 
     private fun buttonPlayClicked() {
-        when(isPlaying){
-            true->{
-                isPlaying=false
+        when (isPlaying) {
+            true -> {
+                isPlaying = false
                 listener?.pause()
-                buttonPlay.text="Играть"
+                buttonPlay.text = "Играть"
             }
-            false->{
-                isPlaying=true
-                val audioArray=getAudioArray()
+            false -> {
+                isPlaying = true
+                val audioArray = getAudioArray()
                 listener?.play(audioArray)
-                buttonPlay.text="Изменить доску"
+                buttonPlay.text = "Изменить доску"
             }
         }
     }
@@ -55,14 +65,14 @@ class MusicPlayer @JvmOverloads constructor(
         )
     }
 
-    fun setListener(musicListener:MusicPlayerListener){
-        listener=musicListener
+    fun setListener(musicListener: MusicPlayerListener) {
+        listener = musicListener
     }
 
-    interface MusicPlayerListener{
+    interface MusicPlayerListener {
         fun pause()
-        fun play(audios:Array<Int?>)
-        fun editInstrument(index:Int, instrumentView:PlayButton)
-        fun volumeChanged(index:Int, volume:Float)
+        fun play(audios: Array<Int?>)
+        fun editInstrument(index: Int, instrumentView: PlayButton)
+        fun volumeChanged(index: Int, volume: Float)
     }
 }

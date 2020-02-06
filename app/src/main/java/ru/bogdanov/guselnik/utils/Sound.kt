@@ -11,15 +11,19 @@ import javax.inject.Singleton
 class Sound @Inject constructor(val context: Context) {
     private val TAG="sound_tag"
     private var soundPool:SoundPool? = null
-    private val streams = mutableListOf<Int>()
+    private var listener:SoundListener?=null
+    private val streamsMap= mutableMapOf<Int,Int>()
+
+    fun setSoundListener(soundListener: SoundListener){
+        listener=soundListener
+    }
 
     fun load(ids: Array<Int?>) {
-        Log.d(TAG, "load: ${ids.joinToString()}")
+        listener?.preparing()
         val audios = arrayOf<Int?>(null, null,null,null)
         var loadCount = ids.count { it!=null }
         if (soundPool==null) initializeSoundPool()
         soundPool?.setOnLoadCompleteListener { soundPool, sampleId, status ->
-            Log.d(TAG, "setOnLoadCompleteListener $loadCount $status")
             if (status == 0) {
                 loadCount--
             }
@@ -50,13 +54,27 @@ class Sound @Inject constructor(val context: Context) {
         Log.d(TAG, "startAll: ${audios.joinToString()}")
         audios.forEach {
             if (it!=null&&soundPool!=null)
-            streams.add(soundPool!!.play(it, 1f, 1f, 1, -1, 1f))
+            streamsMap.put(it, soundPool!!.play(it, 1f, 1f, 1, -1, 1f))
         }
+        listener?.ready()
     }
+
+    fun setVolume(resource:Int, volume:Float){
+        Log.d(TAG, "setVolume: $resource $volume ${streamsMap.contains(resource)}")
+        val streamId=streamsMap.get(resource+1)
+        if (streamId!=null)
+        soundPool?.setVolume(streamId, volume, volume)
+    }
+
 
     fun release() {
         soundPool?.release()
         soundPool=null
+    }
+
+    interface SoundListener{
+        fun preparing()
+        fun ready()
     }
 
 }

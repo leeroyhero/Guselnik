@@ -52,7 +52,19 @@ class PlayFragment : Fragment() {
 
         hideOpenedInstruments()
 
+        sound.setSoundListener(soundListener)
         musicPlayer.setListener(musicListener)
+    }
+
+    val soundListener= object : Sound.SoundListener {
+        override fun preparing() {
+            progressBarPlayFragment.visibility=View.VISIBLE
+        }
+
+        override fun ready() {
+            progressBarPlayFragment.visibility=View.INVISIBLE
+        }
+
     }
 
     val musicListener= object : MusicPlayer.MusicPlayerListener {
@@ -69,9 +81,8 @@ class PlayFragment : Fragment() {
         }
 
         override fun volumeChanged(index: Int, volume: Float) {
-
+            sound.setVolume(index, volume)
         }
-
     }
 
     private fun setupOpenedInstruments() {
