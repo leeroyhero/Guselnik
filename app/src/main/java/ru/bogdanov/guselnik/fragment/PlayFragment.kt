@@ -89,7 +89,7 @@ class PlayFragment : Fragment() {
         recyclerOpenedInstruments.layoutManager =
             GridLayoutManager(context, 2, RecyclerView.HORIZONTAL, false)
         MainScope().launch {
-            val arr = musicInstruments.getOpenedInstruments()
+            val arr = musicInstruments.getOpenedInstruments()?.filter { it.sound!=null }?.toTypedArray()
             if (arr != null) {
                 adapter=OpenedInstrumentsAdapter(arr)
                 recyclerOpenedInstruments.adapter = adapter
