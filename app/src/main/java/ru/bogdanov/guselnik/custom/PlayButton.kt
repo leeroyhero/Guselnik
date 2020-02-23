@@ -20,7 +20,7 @@ class PlayButton @JvmOverloads constructor(
         orientation=LinearLayout.VERTICAL
     }
 
-    fun instrumentChosen(ingredient: Ingredient) {
+    fun setInstrument(ingredient: Ingredient) {
         this.ingredient=ingredient
 
         if (ingredient.image!=null) view.imageViewIcon.setImageResource(ingredient.image)

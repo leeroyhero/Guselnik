@@ -8,7 +8,7 @@
         android:id="@+id/board"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -35,19 +35,17 @@
             android:padding="8dp" />
 
         <ru.bogdanov.guselnik.custom.PlayButton
-            android:id="@+id/instrumentButton3"
+        android:id="@+id/instrumentButton3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="8dp" />
+        <ru.bogdanov.guselnik.custom.PlayButton
+            android:id="@+id/instrumentButton4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="8dp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonPlay"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Играть"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/board" />
 </merge>

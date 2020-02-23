@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_play.*
@@ -23,16 +25,16 @@ import ru.bogdanov.guselnik.custom.MusicPlayer
 import ru.bogdanov.guselnik.custom.PlayButton
 import ru.bogdanov.guselnik.item.Ingredient
 import ru.bogdanov.guselnik.utils.Sound
+import ru.bogdanov.guselnik.viewModel.PlayPresenter
 import javax.inject.Inject
 
 
 class PlayFragment : Fragment() {
     @Inject
     lateinit var sound: Sound
-    @Inject
-    lateinit var musicInstruments: MusicInstruments
 
-    private var adapter:OpenedInstrumentsAdapter?=null
+    private val model:PlayPresenter by activityViewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,94 +50,44 @@ class PlayFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupOpenedInstruments()
 
-        hideOpenedInstruments()
-
-        sound.setSoundListener(soundListener)
-        musicPlayer.setListener(musicListener)
+        buttonChangeInstruments.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_playFragment_to_chooseInstrumentFragment))
     }
 
-    val soundListener= object : Sound.SoundListener {
-        override fun preparing() {
-            progressBarPlayFragment.visibility=View.VISIBLE
-        }
-
-        override fun ready() {
-            progressBarPlayFragment.visibility=View.INVISIBLE
-        }
-
+    override fun onResume() {
+        super.onResume()
+        val chosenList=model.chosenInstruments
+        if (chosenList.isNullOrEmpty()) showPlaceholder()
+        else showMusicPlayer(chosenList)
     }
 
-    val musicListener= object : MusicPlayer.MusicPlayerListener {
-        override fun pause() {
-            sound.release()
-        }
-
-        override fun play(audiosArray: Array<Int?>) {
-            sound.load(audiosArray)
-        }
-
-        override fun editInstrument(index: Int, instrumentView: PlayButton) {
-            showOpenedInstruments(instrumentView)
-        }
-
-        override fun volumeChanged(index: Int, volume: Float) {
-            sound.setVolume(index, volume)
-        }
-    }
-
-    private fun setupOpenedInstruments() {
-        recyclerOpenedInstruments.layoutManager =
-            GridLayoutManager(context, 2, RecyclerView.HORIZONTAL, false)
-        MainScope().launch {
-            val arr = musicInstruments.getOpenedInstruments()?.filter { it.sound!=null }?.toTypedArray()
-            if (arr != null) {
-                adapter=OpenedInstrumentsAdapter(arr)
-                recyclerOpenedInstruments.adapter = adapter
+    private fun showMusicPlayer(chosenList: Array<Ingredient>) {
+        sound.setSoundListener(object : Sound.SoundListener {
+            override fun preparing() {
+                progressBarPlayFragment.visibility=View.VISIBLE
             }
-        }
-    }
 
-    private fun showOpenedInstruments(button:PlayButton) {
-        adapter?.setChoseListener(object : OpenedInstrumentsAdapter.InstrumentChoseListener {
-            override fun chosen(ingredient: Ingredient) {
-                hideOpenedInstruments()
-                button.instrumentChosen(ingredient)
+            override fun ready() {
+                progressBarPlayFragment.visibility=View.INVISIBLE
             }
         })
-
-        chooseInstrumentLayout.animate()
-            .withStartAction {
-                chooseInstrumentLayout.apply {
-                    alpha = 0f
-                    translationY = 200f
-                    visibility = View.VISIBLE
-                }
+        musicPlayer.setListener(object : MusicPlayer.MusicPlayerListener {
+            override fun volumeChanged(index: Int, volume: Float) {
+               sound.setVolume(index, volume)
             }
-            .setInterpolator(DecelerateInterpolator())
-            .alpha(1f)
-            .translationY(0f)
-            .setDuration(200L)
-            .start()
+        })
+        musicPlayer.setList(chosenList)
+        sound.load(chosenList.map { it.sound }.toTypedArray())
+        musicPlayer.visibility=View.VISIBLE
     }
 
-    private fun hideOpenedInstruments() {
-        chooseInstrumentLayout.animate()
-            .withEndAction {
-                chooseInstrumentLayout.visibility = View.INVISIBLE
-            }
-            .setInterpolator(AccelerateInterpolator())
-            .alpha(0f)
-            .translationY(200f)
-            .setDuration(200L)
-            .start()
+    private fun showPlaceholder() {
+        musicPlayer.visibility=View.GONE
     }
 
-
-    override fun onStop() {
-        sound?.release()
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
+        sound.release()
     }
 
 

@@ -2,6 +2,7 @@ package ru.bogdanov.guselnik.di
 
 import dagger.Component
 import ru.bogdanov.guselnik.fragment.PlayFragment
+import ru.bogdanov.guselnik.viewModel.ChooseInstrumentPresenter
 import ru.bogdanov.guselnik.viewModel.CraftViewModel
 import javax.inject.Singleton
 
@@ -10,4 +11,5 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(craftViewModel: CraftViewModel)
     fun inject(craftViewModel: PlayFragment)
+    fun inject(chooseInstrumentPresenter: ChooseInstrumentPresenter)
 }

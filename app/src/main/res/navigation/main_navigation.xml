@@ -26,5 +26,14 @@
         android:id="@+id/playFragment"
         android:name="ru.bogdanov.guselnik.fragment.PlayFragment"
         android:label="fragment_play"
-        tools:layout="@layout/fragment_play" />
+        tools:layout="@layout/fragment_play" >
+        <action
+            android:id="@+id/action_playFragment_to_chooseInstrumentFragment"
+            app:destination="@id/chooseInstrumentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseInstrumentFragment"
+        android:name="ru.bogdanov.guselnik.fragment.ChooseInstrumentFragment"
+        android:label="choose_instrument_fragment"
+        tools:layout="@layout/choose_instrument_fragment" />
 </navigation>
